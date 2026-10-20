@@ -1,0 +1,14 @@
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Domain\bin\Debug\net8.0\PharmacySystem.Domain.deps.json
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Domain\bin\Debug\net8.0\PharmacySystem.Domain.runtimeconfig.json
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Domain\bin\Debug\net8.0\PharmacySystem.Domain.dll
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Domain\bin\Debug\net8.0\PharmacySystem.Domain.pdb
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Domain\obj\Debug\net8.0\PharmacySystem.Domain.csproj.AssemblyReference.cache
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Domain\obj\Debug\net8.0\PharmacySystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Domain\obj\Debug\net8.0\PharmacySystem.Domain.AssemblyInfoInputs.cache
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Domain\obj\Debug\net8.0\PharmacySystem.Domain.AssemblyInfo.cs
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Domain\obj\Debug\net8.0\PharmacySystem.Domain.csproj.CoreCompileInputs.cache
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Domain\obj\Debug\net8.0\PharmacySystem.Domain.dll
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Domain\obj\Debug\net8.0\refint\PharmacySystem.Domain.dll
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Domain\obj\Debug\net8.0\PharmacySystem.Domain.pdb
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Domain\obj\Debug\net8.0\PharmacySystem.Domain.genruntimeconfig.cache
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Domain\obj\Debug\net8.0\ref\PharmacySystem.Domain.dll

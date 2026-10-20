@@ -1,0 +1,17 @@
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\bin\Debug\net8.0\PharmacySystem.Application.deps.json
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\bin\Debug\net8.0\PharmacySystem.Application.runtimeconfig.json
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\bin\Debug\net8.0\PharmacySystem.Application.dll
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\bin\Debug\net8.0\PharmacySystem.Application.pdb
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\bin\Debug\net8.0\PharmacySystem.Domain.dll
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\bin\Debug\net8.0\PharmacySystem.Domain.pdb
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\PharmacySystem.Application.csproj.AssemblyReference.cache
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\PharmacySystem.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\PharmacySystem.Application.AssemblyInfoInputs.cache
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\PharmacySystem.Application.AssemblyInfo.cs
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\PharmacySystem.Application.csproj.CoreCompileInputs.cache
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\Pharmacy.3A3F7311.Up2Date
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\PharmacySystem.Application.dll
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\refint\PharmacySystem.Application.dll
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\PharmacySystem.Application.pdb
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\PharmacySystem.Application.genruntimeconfig.cache
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\ref\PharmacySystem.Application.dll
