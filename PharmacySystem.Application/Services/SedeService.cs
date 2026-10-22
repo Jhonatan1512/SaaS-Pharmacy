@@ -3,6 +3,7 @@ using PharmacySystem.Application.DTOs;
 using PharmacySystem.Application.Interfaces;
 using PharmacySystem.Domain.Entities;
 using PharmacySystem.Domain.Interfaces;
+using System.Threading.Tasks;
 
 namespace PharmacySystem.Application.Services
 {
@@ -13,9 +14,17 @@ namespace PharmacySystem.Application.Services
         {
             _sedeRepository = sedeRepository;
         }
+        private async Task<string> contarSedes()
+        {
+            var cantidadSedes = await _sedeRepository.GetSedeAsync();
+            int siguienteCodigo = cantidadSedes.Count() + 1;
+            return siguienteCodigo.ToString("D4");
+        }
+
         public async Task<SedeDto> CrearSedeAsync(SedeDto sede)
         {
             var nuevaSede = sede.Adapt<Sede>();
+            nuevaSede.CodigoEstablecimientoAnexo = await contarSedes();
             var result = await _sedeRepository.CrearSedeAsync(nuevaSede);
             return result.Adapt<SedeDto>();
         }
@@ -26,5 +35,7 @@ namespace PharmacySystem.Application.Services
             var result = datosDto.Adapt<List<ObtenerSedeDto>>();
             return result;
         }
+
+        
     }
 }

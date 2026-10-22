@@ -17,3 +17,4 @@ D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Infrastructure\obj\Debug\net8
 D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Infrastructure\obj\Debug\net8.0\PharmacySystem.Infrastructure.pdb
 D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Infrastructure\obj\Debug\net8.0\PharmacySystem.Infrastructure.genruntimeconfig.cache
 D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Infrastructure\obj\Debug\net8.0\ref\PharmacySystem.Infrastructure.dll
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Infrastructure\obj\Debug\net8.0\PharmacySystem.Infrastructure.sourcelink.json

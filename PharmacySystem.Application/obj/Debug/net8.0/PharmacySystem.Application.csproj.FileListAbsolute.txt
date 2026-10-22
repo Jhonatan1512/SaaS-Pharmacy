@@ -15,3 +15,4 @@ D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\
 D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\PharmacySystem.Application.pdb
 D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\PharmacySystem.Application.genruntimeconfig.cache
 D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\ref\PharmacySystem.Application.dll
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem.Application\obj\Debug\net8.0\PharmacySystem.Application.sourcelink.json

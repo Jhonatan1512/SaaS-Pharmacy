@@ -8,7 +8,7 @@ namespace PharmacySystem.Application.DTOs
 {
     public class SedeDto
     {
-        public string CodigoEstablecimientoAnexo { get; set; } = string.Empty;
+        
         public string Nombre { get; set; } = string.Empty;
         public string Direccion { get; set; } = string.Empty;
         public string Departamento { get; set; } = string.Empty;

@@ -160,3 +160,4 @@ D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem\bin\Debug\net8.0\Microsoft.As
 D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem\bin\Debug\net8.0\Microsoft.Bcl.Cryptography.dll
 D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem\bin\Debug\net8.0\System.Formats.Asn1.dll
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem\obj\Debug\net8.0\PharmacySystem.Api.sourcelink.json

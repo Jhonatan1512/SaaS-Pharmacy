@@ -142,10 +142,6 @@
       "SedeDto": {
         "type": "object",
         "properties": {
-          "codigoEstablecimientoAnexo": {
-            "type": "string",
-            "nullable": true
-          },
           "nombre": {
             "type": "string",
             "nullable": true
