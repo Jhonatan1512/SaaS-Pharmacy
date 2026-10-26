@@ -11,5 +11,8 @@ namespace PharmacySystem.Application.Interfaces
     {
         Task<SedeDto> CrearSedeAsync(SedeDto sede);
         Task<IEnumerable<ObtenerSedeDto>> ObtenerSedeAsync();
+        Task<SedeDataDto?> ObtenerPersonalOficinaAsync(Guid sedeId);
+        Task<bool> ActualizarSedeAsync(ActualizarSedeDto dto, Guid id);
+        Task<bool> ActualizarEstadoAsync(Guid id);
     }
 }

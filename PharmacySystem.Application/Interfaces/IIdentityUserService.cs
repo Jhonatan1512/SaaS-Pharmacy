@@ -9,7 +9,7 @@ namespace PharmacySystem.Application.Interfaces
 {
     public interface IIdentityUserService
     {
-        Task<Guid> CrearCuentaAsync(UsuarioDto dto);
+        Task<Guid> CrearCuentaAsync(UsuarioDto dto, string password);
         Task AsignarRoleAsync(Guid identityRole, string roleName);
     }
 }

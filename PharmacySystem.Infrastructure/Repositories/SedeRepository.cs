@@ -13,6 +13,13 @@ namespace PharmacySystem.Infrastructure.Repositories
         {
             _context = context;
         }
+
+        public async Task ActualizarSedeAsync(Sede sede)
+        {
+            _context.Sedes.Update(sede);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<Sede> CrearSedeAsync(Sede sede)
         {
             await _context.Sedes.AddAsync(sede);
@@ -23,6 +30,19 @@ namespace PharmacySystem.Infrastructure.Repositories
         public async Task<IEnumerable<Sede>> GetSedeAsync()
         {
             return await _context.Sedes.ToListAsync();
+        }
+
+        public async Task<Sede?> ObtenerSedeIdAsync(Guid Id)
+        {
+            return await _context.Sedes
+                .Include(s => s.Usuarios.Where(u => u.Activo))
+                .AsNoTracking()
+                .FirstOrDefaultAsync(se => se.Id == Id);
+        }
+
+        public async Task<Sede?> ObtenerSedePorIdAsync(Guid Id)
+        {
+            return await _context.Sedes.FirstOrDefaultAsync(se => se.Id == Id);
         }
     }
 }

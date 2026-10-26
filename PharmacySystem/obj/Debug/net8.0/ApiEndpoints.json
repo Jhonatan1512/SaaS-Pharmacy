@@ -33,12 +33,65 @@
   },
   {
     "ContainingType": "PharmacySystem.Api.Controllers.SedeController",
+    "Method": "ObtenerPersonalSede",
+    "RelativePath": "api/Sede/lista-personal/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PharmacySystem.Api.Controllers.SedeController",
     "Method": "Obtenersedes",
     "RelativePath": "api/Sede/lista-sedes",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PharmacySystem.Api.Controllers.SedeController",
+    "Method": "ActualizarEstadoSede",
+    "RelativePath": "api/Sede/update-estado/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PharmacySystem.Api.Controllers.SedeController",
+    "Method": "ActualizarSede",
+    "RelativePath": "api/Sede/update-sede/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PharmacySystem.Application.DTOs.ActualizarSedeDto",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

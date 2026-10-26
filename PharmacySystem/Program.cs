@@ -14,6 +14,7 @@ using PharmacySystem.Infrastructure.Data;
 using PharmacySystem.Infrastructure.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using PharmacySystem.Application.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -105,6 +106,7 @@ builder.Services.AddAuthentication(options =>
 var config = TypeAdapterConfig.GlobalSettings;
 builder.Services.AddSingleton(config);
 builder.Services.AddScoped<IMapper, ServiceMapper>();
+new MapsterConfig().RegisterMappings();
 
 //Validators
 builder.Services.AddControllers(options =>

@@ -27,10 +27,16 @@ namespace PharmacySystem.Application.Services
             _userManager = userManager;
         }
 
+        private string GenerarPassword(string dni)
+        {
+            return $"Pl{dni}*"; 
+        }
+
         public async Task CrearUsuarioAsync(UsuarioDto usuario)
         {
             await _credencialesFermaceutico.ValidarRegistrosDuplicados(usuario.Email, usuario.NumeroDocumento, usuario.NumeroDocumento);
-            var identityuserId = await _identityUserService.CrearCuentaAsync(usuario);
+            var passwordGenerada = GenerarPassword(usuario.NumeroDocumento);
+            var identityuserId = await _identityUserService.CrearCuentaAsync(usuario, passwordGenerada);
             var rolAsignar = string.IsNullOrEmpty(usuario.Rol) ? "Farmaceutico" : usuario.Rol;
             await _identityUserService.AsignarRoleAsync(identityuserId, rolAsignar);            
         }

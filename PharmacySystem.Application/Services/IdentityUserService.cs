@@ -53,7 +53,7 @@ namespace PharmacySystem.Application.Services
             }
         }
 
-        public async Task<Guid> CrearCuentaAsync(UsuarioDto dto)
+        public async Task<Guid> CrearCuentaAsync(UsuarioDto dto, string password)
         {
             var newUser = new Usuario
             {
@@ -67,7 +67,7 @@ namespace PharmacySystem.Application.Services
                 SedeId = dto.SedeId,
             };
 
-            var result = await _userManager.CreateAsync(newUser, dto.Password);
+            var result = await _userManager.CreateAsync(newUser, password);
             if (!result.Succeeded)
             {
                 var errors = string.Join(", ", result.Errors.Select(e => e.Description));

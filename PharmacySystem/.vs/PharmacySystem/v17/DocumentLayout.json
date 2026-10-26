@@ -10,6 +10,9 @@
       "RelativeMoniker": "D:0:0:{C65D1E3B-DA29-4760-BCBA-F7BC2583EB15}|PharmacySystem.Api.csproj|solutionrelative:controllers\\sedecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\interfaces\\isedeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\dtos\\sededto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -20,21 +23,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SedeController.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\Controllers\\SedeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\SedeController.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\Controllers\\SedeController.cs",
-              "RelativeToolTip": "Controllers\\SedeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T16:27:09.075Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
@@ -49,15 +39,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SedeDto.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\DTOs\\SedeDto.cs",
-              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\DTOs\\SedeDto.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\DTOs\\SedeDto.cs",
-              "RelativeToolTip": "..\\PharmacySystem.Application\\DTOs\\SedeDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAIAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "SedeController.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\Controllers\\SedeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SedeController.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\Controllers\\SedeController.cs",
+              "RelativeToolTip": "Controllers\\SedeController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAYwDsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T16:13:46.334Z",
+              "WhenOpened": "2026-10-26T16:09:34.442Z",
               "EditorCaption": ""
             },
             {
@@ -68,9 +58,35 @@
               "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\Services\\SedeService.cs",
               "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Services\\SedeService.cs",
               "RelativeToolTip": "..\\PharmacySystem.Application\\Services\\SedeService.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADMAAAAAAAAAAAAowEkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-22T16:11:30.392Z",
+              "WhenOpened": "2026-10-26T16:02:37.284Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ISedeService.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Interfaces\\ISedeService.cs",
+              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\Interfaces\\ISedeService.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Interfaces\\ISedeService.cs",
+              "RelativeToolTip": "..\\PharmacySystem.Application\\Interfaces\\ISedeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-26T16:01:23.748Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SedeDto.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\DTOs\\SedeDto.cs",
+              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\DTOs\\SedeDto.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\DTOs\\SedeDto.cs",
+              "RelativeToolTip": "..\\PharmacySystem.Application\\DTOs\\SedeDto.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAowBwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-26T16:00:16.24Z",
               "EditorCaption": ""
             }
           ]

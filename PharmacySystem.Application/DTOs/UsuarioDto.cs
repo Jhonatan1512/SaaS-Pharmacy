@@ -10,7 +10,6 @@ namespace PharmacySystem.Application.DTOs
     public class UsuarioDto
     {
         public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
         public TipoDocumento TipoDocumento { get; set; }
         public string NumeroDocumento { get; set; } = string.Empty;
         public string NombreCompletoRazonSocial { get; set; } = string.Empty;

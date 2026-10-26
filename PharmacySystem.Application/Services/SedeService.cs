@@ -36,6 +36,38 @@ namespace PharmacySystem.Application.Services
             return result;
         }
 
-        
+        public async Task<SedeDataDto?> ObtenerPersonalOficinaAsync(Guid sedeId)
+        {
+            var data = await _sedeRepository.ObtenerSedeIdAsync(sedeId);
+
+            if(data == null)
+            {
+                throw new InvalidOperationException("No existen registro para el id indicado");
+            }
+
+            var result = data.Adapt<SedeDataDto>();
+            return result;
+        }
+
+        public async Task<bool> ActualizarSedeAsync(ActualizarSedeDto dto, Guid id)
+        {
+            var sedeExiste = await _sedeRepository.ObtenerSedeIdAsync(id);
+            if (sedeExiste == null) throw new KeyNotFoundException("Sede no encontrada");
+
+            dto.Adapt(sedeExiste);
+            await _sedeRepository.ActualizarSedeAsync(sedeExiste);
+
+            return true;
+        }
+
+        public async Task<bool> ActualizarEstadoAsync(Guid id)
+        {
+            var sedeExiste = await _sedeRepository.ObtenerSedePorIdAsync(id);
+            if(sedeExiste == null) throw new KeyNotFoundException("Sede no encontrada");
+
+            sedeExiste.Activa = !sedeExiste.Activa;
+            await _sedeRepository.ActualizarSedeAsync(sedeExiste);
+            return sedeExiste.Activa;
+        }
     }
 }
