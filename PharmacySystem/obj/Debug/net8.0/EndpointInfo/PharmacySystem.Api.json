@@ -36,6 +36,49 @@
         }
       }
     },
+    "/api/Producto/crear-producto": {
+      "post": {
+        "tags": [
+          "Producto"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Producto/lista-producto": {
+      "get": {
+        "tags": [
+          "Producto"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Sede/crear": {
       "post": {
         "tags": [
@@ -257,6 +300,63 @@
           "password": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductoDto": {
+        "type": "object",
+        "properties": {
+          "codigoBarras": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigoProductoSunat": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreComercial": {
+            "type": "string",
+            "nullable": true
+          },
+          "principioActivo": {
+            "type": "string",
+            "nullable": true
+          },
+          "presentacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "registroSanitario": {
+            "type": "string",
+            "nullable": true
+          },
+          "esPsicotropico": {
+            "type": "boolean"
+          },
+          "tipoAfectacionIgvDefault": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidadesPorCaja": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unidadesPorBlister": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "precioCaja": {
+            "type": "number",
+            "format": "double"
+          },
+          "precioBlister": {
+            "type": "number",
+            "format": "double"
+          },
+          "precioUnidad": {
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false

@@ -16,6 +16,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "PharmacySystem.Api.Controllers.ProductoController",
+    "Method": "CrearProducto",
+    "RelativePath": "api/Producto/crear-producto",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PharmacySystem.Application.DTOs.ProductoDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PharmacySystem.Api.Controllers.ProductoController",
+    "Method": "ObtenerProductos",
+    "RelativePath": "api/Producto/lista-producto",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "PharmacySystem.Api.Controllers.SedeController",
     "Method": "CrearSede",
     "RelativePath": "api/Sede/crear",

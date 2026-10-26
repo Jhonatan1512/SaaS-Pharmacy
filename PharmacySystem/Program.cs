@@ -32,6 +32,8 @@ builder.Services.AddScoped<ICredencialesFermaceutico, CredencialesFarmaceutico>(
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITokenBlackListService, TokenBlackListService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
+builder.Services.AddScoped<IProductoService, ProductService>();
 
 //Identity
 builder.Services.AddIdentity<Usuario, Role>(options =>
