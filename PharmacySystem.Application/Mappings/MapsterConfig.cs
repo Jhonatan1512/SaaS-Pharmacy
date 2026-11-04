@@ -27,6 +27,10 @@ namespace PharmacySystem.Application.Mappings
             TypeAdapterConfig<ActualizarSedeDto, Sede>
                 .NewConfig()
                 .IgnoreNullValues(true);
+
+            TypeAdapterConfig<ActualizarProductoDto, Producto>
+                .NewConfig()
+                .IgnoreNullValues(true);
         }
     }
 }

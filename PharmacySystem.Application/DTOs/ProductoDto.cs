@@ -18,12 +18,31 @@ namespace PharmacySystem.Application.DTOs
 
         // "10" = Gravado, "20" = Exonerado
         public string TipoAfectacionIgvDefault { get; set; } = "10";
-
         public int UnidadesPorCaja { get; set; } = 1;
         public int UnidadesPorBlister { get; set; } = 1;
         public decimal PrecioCaja { get; set; }
         public decimal PrecioBlister { get; set; }
         public decimal PrecioUnidad { get; set; }
+    }
+
+    public class ActualizarProductoDto 
+    {
+        public string? CodigoBarras { get; set; }
+        public string? CodigoProductoSunat { get; set; }
+        public string? NombreComercial { get; set; }
+        public string? PrincipioActivo { get; set; }
+        public string? Presentacion { get; set; }
+        public string? RegistroSanitario { get; set; }
+        public bool? EsPsicotropico { get; set; }
+        public string? TipoAfectacionIgvDefault { get; set; }
+
+        public int? UnidadesPorCaja { get; set; }
+        public int? UnidadesPorBlister { get; set; }
+
+        public decimal? PrecioCaja { get; set; }
+        public decimal? PrecioBlister { get; set; }
+        public decimal? PrecioUnidad { get; set; }
+        public bool? Activo { get; set; }
     }
 
     public class GetProductosDto

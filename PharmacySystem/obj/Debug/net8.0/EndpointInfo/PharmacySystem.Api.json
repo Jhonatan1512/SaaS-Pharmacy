@@ -79,6 +79,71 @@
         }
       }
     },
+    "/api/Producto/actualizar-producto/{id}": {
+      "put": {
+        "tags": [
+          "Producto"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActualizarProductoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActualizarProductoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActualizarProductoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Producto/actualizar-estado-producto/{id}": {
+      "patch": {
+        "tags": [
+          "Producto"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Sede/crear": {
       "post": {
         "tags": [
@@ -256,6 +321,73 @@
   },
   "components": {
     "schemas": {
+      "ActualizarProductoDto": {
+        "type": "object",
+        "properties": {
+          "codigoBarras": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigoProductoSunat": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreComercial": {
+            "type": "string",
+            "nullable": true
+          },
+          "principioActivo": {
+            "type": "string",
+            "nullable": true
+          },
+          "presentacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "registroSanitario": {
+            "type": "string",
+            "nullable": true
+          },
+          "esPsicotropico": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "tipoAfectacionIgvDefault": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidadesPorCaja": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "unidadesPorBlister": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "precioCaja": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "precioBlister": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "precioUnidad": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "activo": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ActualizarSedeDto": {
         "type": "object",
         "properties": {

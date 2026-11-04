@@ -17,6 +17,13 @@ namespace PharmacySystem.Infrastructure.Repositories
         {
             _context = context;
         }
+
+        public async Task ActualizarProductoAsync(Producto producto)
+        {
+            _context.Productos.Update(producto);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<Producto> CrearProductoAsync(Producto producto)
         {
             await _context.Productos.AddAsync(producto);

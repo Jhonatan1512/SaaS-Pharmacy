@@ -31,5 +31,21 @@ namespace PharmacySystem.Api.Controllers
             var result = await _productoService.ObtenerProductosAsync();
             return Ok(result);
         }
+
+        [HttpPut("actualizar-producto/{id}")]
+        [Authorize(Roles = "Gerente")]
+        public async Task<IActionResult> ActualizarProducto(Guid id, ActualizarProductoDto dto)
+        {
+            await _productoService.ActualizarProductoAsync(id, dto);
+            return Ok(new {message = "Datos del producto actualizados"}); 
+        }
+
+        [HttpPatch("actualizar-estado-producto/{id}")]
+        [Authorize(Roles = "Gerente")]
+        public async Task<IActionResult> ActualizarEstadoProducto(Guid id)
+        {
+            await _productoService.ActualizarEstadoProductoAsync(id);
+            return Ok(new { message = "Estado del producto actualizado" });
+        }
     }
 }

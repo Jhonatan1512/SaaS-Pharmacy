@@ -13,5 +13,6 @@ namespace PharmacySystem.Domain.Interfaces
         Task<IEnumerable<Producto>> GetAllProductsAsync();
         Task<Producto?> ObtenerPorIdAsync(Guid Id);
         Task<Producto?> ObtenerPorCodigoBarrasAsync(string codigoBarras);
+        Task ActualizarProductoAsync(Producto producto);
     }
 }
