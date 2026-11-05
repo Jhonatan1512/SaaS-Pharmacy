@@ -3,26 +3,26 @@
   "WorkspaceRootPath": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C65D1E3B-DA29-4760-BCBA-F7BC2583EB15}|PharmacySystem.Api.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem\\controllers\\lotecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C65D1E3B-DA29-4760-BCBA-F7BC2583EB15}|PharmacySystem.Api.csproj|solutionrelative:controllers\\lotecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\services\\invetariosedeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\validatos\\lotevalidatordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C65D1E3B-DA29-4760-BCBA-F7BC2583EB15}|PharmacySystem.Api.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem\\controllers\\inventariosedecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C65D1E3B-DA29-4760-BCBA-F7BC2583EB15}|PharmacySystem.Api.csproj|solutionrelative:controllers\\inventariosedecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\services\\loteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9B30EABA-0938-4E4C-816B-9D8C8AFC769E}|..\\PharmacySystem.Domain\\PharmacySystem.Domain.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.domain\\enums\\estadolotesedeenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F0BE6B45-980B-43AC-B1C7-16DF711DD237}|..\\PharmacySystem.Infrastructure\\PharmacySystem.Infrastructure.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.infrastructure\\repositories\\loterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\interfaces\\iinventariosedeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B30EABA-0938-4E4C-816B-9D8C8AFC769E}|..\\PharmacySystem.Domain\\PharmacySystem.Domain.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.domain\\interfaces\\iloterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\dtos\\inventariosededto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\interfaces\\iloteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F0BE6B45-980B-43AC-B1C7-16DF711DD237}|..\\PharmacySystem.Infrastructure\\PharmacySystem.Infrastructure.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.infrastructure\\repositories\\inventariosederepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\dtos\\lotedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9B30EABA-0938-4E4C-816B-9D8C8AFC769E}|..\\PharmacySystem.Domain\\PharmacySystem.Domain.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.domain\\interfaces\\iinventariosederepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -32,7 +32,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -48,93 +48,93 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LoteController.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\Controllers\\LoteController.cs",
-              "RelativeDocumentMoniker": "Controllers\\LoteController.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\Controllers\\LoteController.cs",
-              "RelativeToolTip": "Controllers\\LoteController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAbAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "EstadoLoteSedeEnum.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Enums\\EstadoLoteSedeEnum.cs",
+              "RelativeDocumentMoniker": "..\\PharmacySystem.Domain\\Enums\\EstadoLoteSedeEnum.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Enums\\EstadoLoteSedeEnum.cs",
+              "RelativeToolTip": "..\\PharmacySystem.Domain\\Enums\\EstadoLoteSedeEnum.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-04T16:56:06.247Z",
+              "WhenOpened": "2026-11-05T16:45:35.36Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "LoteValidatorDto.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Validatos\\LoteValidatorDto.cs",
-              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\Validatos\\LoteValidatorDto.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Validatos\\LoteValidatorDto.cs",
-              "RelativeToolTip": "..\\PharmacySystem.Application\\Validatos\\LoteValidatorDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAABfAAAAAAAAAA==",
+              "Title": "InventarioSedeController.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\Controllers\\InventarioSedeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\InventarioSedeController.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\Controllers\\InventarioSedeController.cs",
+              "RelativeToolTip": "Controllers\\InventarioSedeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-04T16:52:53.549Z",
+              "WhenOpened": "2026-11-05T16:02:09.229Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LoteService.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Services\\LoteService.cs",
-              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\Services\\LoteService.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Services\\LoteService.cs",
-              "RelativeToolTip": "..\\PharmacySystem.Application\\Services\\LoteService.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAQwCYAAAArAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "InvetarioSedeService.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Services\\InvetarioSedeService.cs",
+              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\Services\\InvetarioSedeService.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Services\\InvetarioSedeService.cs",
+              "RelativeToolTip": "..\\PharmacySystem.Application\\Services\\InvetarioSedeService.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAmwCYAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-04T16:36:29.854Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ILoteService.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Interfaces\\ILoteService.cs",
-              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\Interfaces\\ILoteService.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Interfaces\\ILoteService.cs",
-              "RelativeToolTip": "..\\PharmacySystem.Application\\Interfaces\\ILoteService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-04T16:34:17.58Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "LoteDto.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\DTOs\\LoteDto.cs",
-              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\DTOs\\LoteDto.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\DTOs\\LoteDto.cs",
-              "RelativeToolTip": "..\\PharmacySystem.Application\\DTOs\\LoteDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-04T16:32:49.043Z",
+              "WhenOpened": "2026-11-05T15:47:57.16Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "LoteRepository.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Infrastructure\\Repositories\\LoteRepository.cs",
-              "RelativeDocumentMoniker": "..\\PharmacySystem.Infrastructure\\Repositories\\LoteRepository.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Infrastructure\\Repositories\\LoteRepository.cs",
-              "RelativeToolTip": "..\\PharmacySystem.Infrastructure\\Repositories\\LoteRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAABfAAAAAAAAAA==",
+              "Title": "IInventarioSedeService.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Interfaces\\IInventarioSedeService.cs",
+              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\Interfaces\\IInventarioSedeService.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Interfaces\\IInventarioSedeService.cs",
+              "RelativeToolTip": "..\\PharmacySystem.Application\\Interfaces\\IInventarioSedeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-04T16:30:40.53Z",
+              "WhenOpened": "2026-11-05T15:45:33.727Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ILoteRepository.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Interfaces\\ILoteRepository.cs",
-              "RelativeDocumentMoniker": "..\\PharmacySystem.Domain\\Interfaces\\ILoteRepository.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Interfaces\\ILoteRepository.cs",
-              "RelativeToolTip": "..\\PharmacySystem.Domain\\Interfaces\\ILoteRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABRAAAAAAAAAA==",
+              "Title": "InventarioSedeDto.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\DTOs\\InventarioSedeDto.cs",
+              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\DTOs\\InventarioSedeDto.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\DTOs\\InventarioSedeDto.cs",
+              "RelativeToolTip": "..\\PharmacySystem.Application\\DTOs\\InventarioSedeDto.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAgwBIAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-04T16:29:34.949Z",
+              "WhenOpened": "2026-11-05T15:44:21.146Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "InventarioSedeRepository.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Infrastructure\\Repositories\\InventarioSedeRepository.cs",
+              "RelativeDocumentMoniker": "..\\PharmacySystem.Infrastructure\\Repositories\\InventarioSedeRepository.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Infrastructure\\Repositories\\InventarioSedeRepository.cs",
+              "RelativeToolTip": "..\\PharmacySystem.Infrastructure\\Repositories\\InventarioSedeRepository.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAACgAAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-05T15:27:16.19Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IInventarioSedeRepository.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Interfaces\\IInventarioSedeRepository.cs",
+              "RelativeDocumentMoniker": "..\\PharmacySystem.Domain\\Interfaces\\IInventarioSedeRepository.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Interfaces\\IInventarioSedeRepository.cs",
+              "RelativeToolTip": "..\\PharmacySystem.Domain\\Interfaces\\IInventarioSedeRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-05T15:26:06.986Z",
               "EditorCaption": ""
             }
           ]

@@ -36,6 +36,122 @@
         }
       }
     },
+    "/api/InventarioSede/crear-invetario": {
+      "post": {
+        "tags": [
+          "InventarioSede"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventarioSedeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventarioSedeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventarioSedeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Lote/crear-lote": {
+      "post": {
+        "tags": [
+          "Lote"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoteDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoteDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Lote/lista-lotes": {
+      "get": {
+        "tags": [
+          "Lote"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Lote/actualizar-lote/{id}": {
+      "patch": {
+        "tags": [
+          "Lote"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/actualizarLoteDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/actualizarLoteDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/actualizarLoteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Producto/crear-producto": {
       "post": {
         "tags": [
@@ -422,6 +538,53 @@
         },
         "additionalProperties": false
       },
+      "EstadoLoteSedeEnum": {
+        "enum": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "InventarioSedeDto": {
+        "type": "object",
+        "properties": {
+          "sedeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "loteId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "stockFisicoUnidades": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "precioVentaUnidad": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "precioVentaBlister": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "precioVentaCaja": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoLoteSedeEnum"
+          }
+        },
+        "additionalProperties": false
+      },
       "LoginDto": {
         "type": "object",
         "properties": {
@@ -432,6 +595,28 @@
           "password": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoteDto": {
+        "type": "object",
+        "properties": {
+          "productoId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "codigoLote": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaVencimiento": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "precioCostoUnitario": {
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false
@@ -560,6 +745,31 @@
           },
           "rol": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "actualizarLoteDto": {
+        "type": "object",
+        "properties": {
+          "productoId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "codigoLote": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaVencimiento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "precioCostoUnitario": {
+            "type": "number",
+            "format": "double",
             "nullable": true
           }
         },

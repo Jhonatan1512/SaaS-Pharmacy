@@ -280,9 +280,11 @@ namespace PharmacySystem.Infrastructure.Migrations
 
                     b.HasIndex("LoteId");
 
-                    b.HasIndex("SedeId");
-
                     b.HasIndex("UsuarioRecibeId");
+
+                    b.HasIndex("SedeId", "LoteId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_InventarioSedes_SedeId_LoteId");
 
                     b.ToTable("InventarioSedes");
                 });
@@ -314,7 +316,9 @@ namespace PharmacySystem.Infrastructure.Migrations
                     b.HasIndex("CodigoLote")
                         .HasDatabaseName("IX_Lotes_CodigoLote");
 
-                    b.HasIndex("ProductoId");
+                    b.HasIndex("ProductoId", "CodigoLote")
+                        .IsUnique()
+                        .HasDatabaseName("IX_Lotes_ProductoId_CodigoLote");
 
                     b.ToTable("Lotes");
                 });
@@ -801,7 +805,7 @@ namespace PharmacySystem.Infrastructure.Migrations
                             NormalizedEmail = "GERENCIA@FARMACIA.COM",
                             NormalizedUserName = "GERENCIA@FARMACIA.COM",
                             NumeroDoc = "20552103816",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDm0hwW93zyOXTQImVq1V64e0Ph1M/KZCXTWf0cFShRabOvkSm1Wn9wgeiAbVEGwCQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDL7pO8EpA7aHB/E1h6x8iy+wXU1biwgOosnc+F2NQ3xOK0iypU/5FlfCDJUkBy9Ag==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "d3b07384-d113-40e4-a720-78fbf2fb1873",
                             TwoFactorEnabled = false,

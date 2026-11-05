@@ -23,5 +23,21 @@ namespace PharmacySystem.Api.Controllers
             await _loteService.CrearLoteAsync(dto);
             return Ok(new { message = "Lote creado correctamente" });
         }
+
+        [HttpGet("lista-lotes")]
+        [Authorize(Roles = "Gerente")]
+        public async Task<IActionResult> ObtenerListaLotes()
+        {
+            var result = await _loteService.GetLoteAsync();
+            return Ok(result);
+        }
+
+        [HttpPatch("actualizar-lote/{id}")]
+        [Authorize(Roles = "Gerente")]
+        public async Task<IActionResult> ActualizarLote(Guid id, actualizarLoteDto dto)
+        {
+            await _loteService.ActualizarLoteAsync(id, dto);
+            return Ok(new { messagd = "Registro actualizado" });
+        }
     }
 }

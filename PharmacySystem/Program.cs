@@ -34,6 +34,10 @@ builder.Services.AddScoped<ITokenBlackListService, TokenBlackListService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
 builder.Services.AddScoped<IProductoService, ProductService>();
+builder.Services.AddScoped<ILoteRepository, LoteRepository>();
+builder.Services.AddScoped<ILoteService, LoteService>();
+builder.Services.AddScoped<IInventarioSedeRepository, InventarioSedeRepository>();
+builder.Services.AddScoped<IInventarioSedeService, InvetarioSedeService>();
 
 //Identity
 builder.Services.AddIdentity<Usuario, Role>(options =>

@@ -103,6 +103,21 @@ namespace PharmacySystem.Infrastructure.Data
                 .HasIndex(v => new { v.SedeId, v.TipoComprobante, v.Serie, v.Numero })
                 .HasDatabaseName("IX_Ventas_Comprobante");
 
+            builder.Entity<Lote>(entity =>
+            {
+                entity.HasIndex(l => new { l.ProductoId, l.CodigoLote })
+                .IsUnique()
+                .HasDatabaseName("IX_Lotes_ProductoId_CodigoLote");
+            });
+
+            // Índice compuesto único: Una sede no puede tener dos registros activos para el mismo lote
+            builder.Entity<InventarioSede>(entity =>
+            {
+                entity.HasIndex(x => new { x.SedeId, x.LoteId })
+                .IsUnique()
+                .HasDatabaseName("IX_InventarioSedes_SedeId_LoteId");
+            });
+
             SeedIdentityData(builder);
         }
 

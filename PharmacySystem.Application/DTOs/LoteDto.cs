@@ -23,4 +23,12 @@ namespace PharmacySystem.Application.DTOs
         public decimal PrecioCostoUnitario { get; set; }
         public DateTime FechaCreacion { get; set; }
     }
+
+    public class actualizarLoteDto
+    {
+        public Guid? ProductoId { get; set; }
+        public string? CodigoLote { get; set; } 
+        public DateTime? FechaVencimiento { get; set; }
+        public decimal? PrecioCostoUnitario { get; set; }
+    }
 }

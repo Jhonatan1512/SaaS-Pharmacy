@@ -17,15 +17,34 @@ namespace PharmacySystem.Infrastructure.Repositories
         {
             _context = context;
         }
+
+        public async Task ActualizarloteAsync(Lote lote)
+        {
+            await _context.SaveChangesAsync();
+        }
+
         public async Task CrearLoteAsync(Lote lote)
         {
             _context.Lotes.Add(lote);
             await _context.SaveChangesAsync();
         }
 
+        public async Task<bool> ExisteCodigoLoteEnOtroRegistroAsync(Guid productoId, string codigoLote, Guid loteIdActual)
+        {
+            return await _context.Lotes
+                .AnyAsync(l => l.ProductoId == productoId
+                            && l.CodigoLote == codigoLote
+                            && l.Id != loteIdActual);
+        }
+
         public async Task<bool> ExisteLoteEnProductoAsync(Guid productoId, string codigoLote)
         {
             return await _context.Lotes.AnyAsync(l => l.ProductoId == productoId && l.CodigoLote.ToLower() == codigoLote.ToLower());
+        }
+
+        public async Task<Lote?> ObtenerLotePorIAsync(Guid id)
+        {
+            return await _context.Lotes.FirstOrDefaultAsync(l => l.Id == id);
         }
 
         public async Task<IEnumerable<Lote>> ObtenerLotesAsync()

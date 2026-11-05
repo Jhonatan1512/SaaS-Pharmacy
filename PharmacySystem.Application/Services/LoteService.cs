@@ -20,6 +20,35 @@ namespace PharmacySystem.Application.Services
             _loteRepository = loteRepository;
             _productoRepository = productoRepository;
         }
+
+        public async Task ActualizarLoteAsync(Guid id, actualizarLoteDto dto)
+        {
+            var loteExiste = await _loteRepository.ObtenerLotePorIAsync(id);
+            if (loteExiste == null)
+                throw new KeyNotFoundException("Registro de lote no encontrado.");
+
+            // 2. Determinar los valores objetivo para evaluar duplicidad
+            var productoIdObjetivo = dto.ProductoId ?? loteExiste.ProductoId;
+
+            if (dto.CodigoLote != null)
+            {
+                dto.CodigoLote = dto.CodigoLote.Trim().ToUpper();
+            }
+            var codigoLoteObjetivo = dto.CodigoLote ?? loteExiste.CodigoLote;
+
+            // 3. Validar duplicidad excluyendo el propio ID que se está actualizando
+            if (await _loteRepository.ExisteCodigoLoteEnOtroRegistroAsync(productoIdObjetivo, codigoLoteObjetivo, id))
+            {
+                throw new InvalidOperationException($"El producto ya cuenta con otro lote registrado bajo el código '{codigoLoteObjetivo}'.");
+            }
+
+            // 4. Copiar únicamente los valores enviadas en el DTO a la entidad
+            dto.Adapt(loteExiste);
+
+            // 5. Persistir cambios en la base de datos via ChangeTracker
+            await _loteRepository.ActualizarloteAsync(loteExiste);
+        }
+
         public async Task CrearLoteAsync(LoteDto dto)
         {
             var productoExiste = await _productoRepository.ObtenerPorIdAsync(dto.ProductoId);
@@ -43,9 +72,14 @@ namespace PharmacySystem.Application.Services
             await _loteRepository.CrearLoteAsync(nuevoLote);
         }
 
-        public Task<IEnumerable<GetLoteDto>> GetLoteAsync()
+        public async Task<IEnumerable<GetLoteDto>> GetLoteAsync()
         {
-            throw new NotImplementedException();
+            var datosBd = await _loteRepository.ObtenerLotesAsync();
+
+            if (datosBd == null) throw new InvalidOperationException("No existe datos registrado");
+
+            var result = datosBd.Adapt<List<GetLoteDto>>();
+            return result;
         }
     }
 }
