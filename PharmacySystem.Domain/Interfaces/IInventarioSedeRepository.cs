@@ -18,5 +18,6 @@ namespace PharmacySystem.Domain.Interfaces
         Task EliminarRegistroAsync(InventarioSede inventario);
         Task<InventarioSede?> ObtenerPorIdAsync(Guid id);
         Task<InventarioSede?> ObtenerPorSedeLotePrecioYEstadoAsync(Guid sedeId, Guid loteId, decimal precioVentaUnidad, EstadoLoteSedeEnum estado);
+        Task<IEnumerable<InventarioSede>> ObtenerPorSedeIdAsync(Guid sedeId);
     }
 }

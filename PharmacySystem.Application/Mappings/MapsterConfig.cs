@@ -35,6 +35,12 @@ namespace PharmacySystem.Application.Mappings
             TypeAdapterConfig<actualizarLoteDto, Lote>
                 .NewConfig()
                 .IgnoreNullValues(true);
+
+            TypeAdapterConfig<InventarioSede, InvetarioSedeResponseDto>.NewConfig()
+                .Map(dest => dest.NombreSede, src => src.Sede.Nombre)
+                .Map(dest => dest.CodigoLote, src => src.Lote.CodigoLote) 
+                .Map(dest => dest.NombreProducto, src => src.Lote.Producto.NombreComercial)
+                .Map(dest => dest.NombreUsuarioRecibe, src => src.UsuarioRecibe != null ? src.UsuarioRecibe.NombreCompletoRazonSocial : null);
         }
     }
 }

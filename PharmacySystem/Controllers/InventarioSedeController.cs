@@ -42,6 +42,23 @@ namespace PharmacySystem.Api.Controllers
             return NoContent(); 
         }
 
+        [HttpGet("lotes-sede/{id}")]
+        [Authorize(Roles = "Gerente")]
+        public async Task<IActionResult> ObtenerInventarioPorSede(Guid id)
+        {
+            var response = await _inventarioSedeService.GetInvetarioSedeAsync(id);
+            return Ok(response);
+        }
+
+        [HttpPatch("corregir-merma/{id}")]
+        [Authorize(Roles = "Farmaceutico")]
+        public async Task<IActionResult> CorregirMerma(Guid id, [FromBody] CorregirRecepcionDto dto)
+        {
+            Guid userId = UsuarioId;
+            await _inventarioSedeService.CorregirMermaRecepcionAsync(userId, id, dto);
+            return NoContent(); 
+        }
+
         private Guid UsuarioId => _currentUser.GetUserId();
     }
 }

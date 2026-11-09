@@ -73,5 +73,19 @@ namespace PharmacySystem.Infrastructure.Repositories
                     i.PrecioVentaUnidad == precioVentaUnidad &&
                     i.Estado == estado);
         }
+
+        public async Task<IEnumerable<InventarioSede>> ObtenerPorSedeIdAsync(Guid sedeId)
+        {
+            return await _context.InventarioSedes
+                .AsNoTracking()
+                .Include(i => i.Sede)                  
+                .Include(i => i.UsuarioRecibe)          
+                .Include(i => i.Lote)
+                    .ThenInclude(l => l.Producto)      
+                .Where(i => i.SedeId == sedeId)
+                .OrderBy(i => i.Estado)
+                .ThenBy(i => i.Lote.FechaVencimiento)
+                .ToListAsync();
+        }
     }
 }

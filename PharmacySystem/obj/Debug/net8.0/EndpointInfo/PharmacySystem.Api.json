@@ -151,6 +151,71 @@
         }
       }
     },
+    "/api/InventarioSede/lotes-sede/{id}": {
+      "get": {
+        "tags": [
+          "InventarioSede"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/InventarioSede/corregir-merma/{id}": {
+      "patch": {
+        "tags": [
+          "InventarioSede"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CorregirRecepcionDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CorregirRecepcionDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CorregirRecepcionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Lote/crear-lote": {
       "post": {
         "tags": [
@@ -652,6 +717,20 @@
           "precioVentaCaja": {
             "type": "number",
             "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CorregirRecepcionDto": {
+        "type": "object",
+        "properties": {
+          "nuevaCantidadDanada": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "motivoCorreccion": {
+            "type": "string",
             "nullable": true
           }
         },

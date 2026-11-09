@@ -34,6 +34,8 @@ namespace PharmacySystem.Application.DTOs
         public string Estado { get; set; } = string.Empty;
         public DateTime? FechaRecepcion { get; set; }
         public Guid? UsuarioRecibeId { get; set; }
+        public string? NombreUsuarioRecibe { get; set; }
+        public string? ObservacionRecepcion { get; set; }
     }
 
     public class CorregirPrecioInventarioSedeDto
@@ -47,5 +49,11 @@ namespace PharmacySystem.Application.DTOs
     {
         public int CantidadDaniada { get; set; }
         public string Observacion { get; set; } = string.Empty;
+    }
+
+    public class CorregirRecepcionDto
+    {
+        public int NuevaCantidadDanada { get; set; }
+        public string MotivoCorreccion { get; set; } = string.Empty;
     }
 }

@@ -249,6 +249,9 @@ namespace PharmacySystem.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("CantidadDaniadaAcumulada")
+                        .HasColumnType("int");
+
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
@@ -274,6 +277,9 @@ namespace PharmacySystem.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("StockFisicoUnidades")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UltimaCantidadDaniada")
                         .HasColumnType("int");
 
                     b.Property<Guid?>("UsuarioRecibeId")
@@ -807,7 +813,7 @@ namespace PharmacySystem.Infrastructure.Migrations
                             NormalizedEmail = "GERENCIA@FARMACIA.COM",
                             NormalizedUserName = "GERENCIA@FARMACIA.COM",
                             NumeroDoc = "20552103816",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAISVQ0piUg1bcKs0mLbcA8H5DNO6QX5G12SS6Xa+GG+Wqgbax+cuJBqbNmDYEyezw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMObrMRvmzqtjTyTYt4qvrVGh7DxUta+t6z5qJs7+lLZ+z40q25mUh8e9Zb+mO+77A==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "d3b07384-d113-40e4-a720-78fbf2fb1873",
                             TwoFactorEnabled = false,
