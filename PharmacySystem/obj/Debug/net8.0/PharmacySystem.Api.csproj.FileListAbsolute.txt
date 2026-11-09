@@ -161,3 +161,4 @@ D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem\bin\Debug\net8.0\Microsoft.Bc
 D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem\bin\Debug\net8.0\System.Formats.Asn1.dll
 D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem\obj\Debug\net8.0\PharmacySystem.Api.sourcelink.json
+D:\.NET-PHARMACY-SYSTEM\Api-Backend\PharmacySystem\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll

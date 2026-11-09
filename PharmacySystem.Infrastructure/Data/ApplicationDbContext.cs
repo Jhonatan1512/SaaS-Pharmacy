@@ -114,7 +114,6 @@ namespace PharmacySystem.Infrastructure.Data
             builder.Entity<InventarioSede>(entity =>
             {
                 entity.HasIndex(x => new { x.SedeId, x.LoteId })
-                .IsUnique()
                 .HasDatabaseName("IX_InventarioSedes_SedeId_LoteId");
             });
 

@@ -35,4 +35,17 @@ namespace PharmacySystem.Application.DTOs
         public DateTime? FechaRecepcion { get; set; }
         public Guid? UsuarioRecibeId { get; set; }
     }
+
+    public class CorregirPrecioInventarioSedeDto
+    {
+        public decimal? PrecioVentaUnidad { get; set; }
+        public decimal? PrecioVentaBlister { get; set; }
+        public decimal? PrecioVentaCaja { get; set; }
+    }
+
+    public class ConfirmarRecepcionInventarioDto
+    {
+        public int CantidadDaniada { get; set; }
+        public string Observacion { get; set; } = string.Empty;
+    }
 }

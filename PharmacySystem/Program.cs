@@ -37,7 +37,8 @@ builder.Services.AddScoped<IProductoService, ProductService>();
 builder.Services.AddScoped<ILoteRepository, LoteRepository>();
 builder.Services.AddScoped<ILoteService, LoteService>();
 builder.Services.AddScoped<IInventarioSedeRepository, InventarioSedeRepository>();
-builder.Services.AddScoped<IInventarioSedeService, InvetarioSedeService>();
+builder.Services.AddScoped<IInventarioSedeService, InventarioSedeService>();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 //Identity
 builder.Services.AddIdentity<Usuario, Role>(options =>
@@ -50,7 +51,6 @@ builder.Services.AddIdentity<Usuario, Role>(options =>
 })
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
-
 
 //login (token)
 builder.Services.AddEndpointsApiExplorer();

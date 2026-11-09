@@ -67,6 +67,90 @@
         }
       }
     },
+    "/api/InventarioSede/corregir-precios/{id}": {
+      "patch": {
+        "tags": [
+          "InventarioSede"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CorregirPrecioInventarioSedeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CorregirPrecioInventarioSedeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CorregirPrecioInventarioSedeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/InventarioSede/confirmar-recepcion/{id}": {
+      "post": {
+        "tags": [
+          "InventarioSede"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmarRecepcionInventarioDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmarRecepcionInventarioDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmarRecepcionInventarioDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Lote/crear-lote": {
       "post": {
         "tags": [
@@ -533,6 +617,41 @@
           },
           "telefono": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConfirmarRecepcionInventarioDto": {
+        "type": "object",
+        "properties": {
+          "cantidadDaniada": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "observacion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CorregirPrecioInventarioSedeDto": {
+        "type": "object",
+        "properties": {
+          "precioVentaUnidad": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "precioVentaBlister": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "precioVentaCaja": {
+            "type": "number",
+            "format": "double",
             "nullable": true
           }
         },

@@ -258,6 +258,9 @@ namespace PharmacySystem.Infrastructure.Migrations
                     b.Property<Guid>("LoteId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ObservacionRecepcion")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("PrecioVentaBlister")
                         .HasColumnType("decimal(18,4)");
 
@@ -283,7 +286,6 @@ namespace PharmacySystem.Infrastructure.Migrations
                     b.HasIndex("UsuarioRecibeId");
 
                     b.HasIndex("SedeId", "LoteId")
-                        .IsUnique()
                         .HasDatabaseName("IX_InventarioSedes_SedeId_LoteId");
 
                     b.ToTable("InventarioSedes");
@@ -805,7 +807,7 @@ namespace PharmacySystem.Infrastructure.Migrations
                             NormalizedEmail = "GERENCIA@FARMACIA.COM",
                             NormalizedUserName = "GERENCIA@FARMACIA.COM",
                             NumeroDoc = "20552103816",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDL7pO8EpA7aHB/E1h6x8iy+wXU1biwgOosnc+F2NQ3xOK0iypU/5FlfCDJUkBy9Ag==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAISVQ0piUg1bcKs0mLbcA8H5DNO6QX5G12SS6Xa+GG+Wqgbax+cuJBqbNmDYEyezw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "d3b07384-d113-40e4-a720-78fbf2fb1873",
                             TwoFactorEnabled = false,

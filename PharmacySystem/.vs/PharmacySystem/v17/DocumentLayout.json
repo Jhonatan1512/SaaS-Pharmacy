@@ -10,16 +10,13 @@
       "RelativeMoniker": "D:0:0:{C65D1E3B-DA29-4760-BCBA-F7BC2583EB15}|PharmacySystem.Api.csproj|solutionrelative:controllers\\inventariosedecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B30EABA-0938-4E4C-816B-9D8C8AFC769E}|..\\PharmacySystem.Domain\\PharmacySystem.Domain.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.domain\\enums\\estadolotesedeenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F0BE6B45-980B-43AC-B1C7-16DF711DD237}|..\\PharmacySystem.Infrastructure\\PharmacySystem.Infrastructure.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.infrastructure\\repositories\\inventariosederepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\interfaces\\iinventariosedeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\dtos\\inventariosededto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F0BE6B45-980B-43AC-B1C7-16DF711DD237}|..\\PharmacySystem.Infrastructure\\PharmacySystem.Infrastructure.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.infrastructure\\repositories\\inventariosederepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9B30EABA-0938-4E4C-816B-9D8C8AFC769E}|..\\PharmacySystem.Domain\\PharmacySystem.Domain.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.domain\\interfaces\\iinventariosederepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -32,7 +29,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -48,28 +45,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "EstadoLoteSedeEnum.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Enums\\EstadoLoteSedeEnum.cs",
-              "RelativeDocumentMoniker": "..\\PharmacySystem.Domain\\Enums\\EstadoLoteSedeEnum.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Enums\\EstadoLoteSedeEnum.cs",
-              "RelativeToolTip": "..\\PharmacySystem.Domain\\Enums\\EstadoLoteSedeEnum.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T16:45:35.36Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
               "Title": "InventarioSedeController.cs",
               "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\Controllers\\InventarioSedeController.cs",
               "RelativeDocumentMoniker": "Controllers\\InventarioSedeController.cs",
               "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\Controllers\\InventarioSedeController.cs",
               "RelativeToolTip": "Controllers\\InventarioSedeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAiwCUAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T16:02:09.229Z",
+              "WhenOpened": "2026-11-05T21:24:08.921Z",
               "EditorCaption": ""
             },
             {
@@ -80,7 +64,7 @@
               "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\Services\\InvetarioSedeService.cs",
               "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Services\\InvetarioSedeService.cs",
               "RelativeToolTip": "..\\PharmacySystem.Application\\Services\\InvetarioSedeService.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAmwCYAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAYwD0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-11-05T15:47:57.16Z",
               "EditorCaption": ""
@@ -93,10 +77,9 @@
               "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\Interfaces\\IInventarioSedeService.cs",
               "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Interfaces\\IInventarioSedeService.cs",
               "RelativeToolTip": "..\\PharmacySystem.Application\\Interfaces\\IInventarioSedeService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T15:45:33.727Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-05T15:45:33.727Z"
             },
             {
               "$type": "Document",
@@ -106,36 +89,33 @@
               "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\DTOs\\InventarioSedeDto.cs",
               "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\DTOs\\InventarioSedeDto.cs",
               "RelativeToolTip": "..\\PharmacySystem.Application\\DTOs\\InventarioSedeDto.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAgwBIAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAACMAAAAAAAAAAAAgwC4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T15:44:21.146Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-05T15:44:21.146Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "InventarioSedeRepository.cs",
               "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Infrastructure\\Repositories\\InventarioSedeRepository.cs",
               "RelativeDocumentMoniker": "..\\PharmacySystem.Infrastructure\\Repositories\\InventarioSedeRepository.cs",
               "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Infrastructure\\Repositories\\InventarioSedeRepository.cs",
               "RelativeToolTip": "..\\PharmacySystem.Infrastructure\\Repositories\\InventarioSedeRepository.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAAACgAAABUAAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAAAwwCMAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T15:27:16.19Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-05T15:27:16.19Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "IInventarioSedeRepository.cs",
               "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Interfaces\\IInventarioSedeRepository.cs",
               "RelativeDocumentMoniker": "..\\PharmacySystem.Domain\\Interfaces\\IInventarioSedeRepository.cs",
               "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Interfaces\\IInventarioSedeRepository.cs",
               "RelativeToolTip": "..\\PharmacySystem.Domain\\Interfaces\\IInventarioSedeRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T15:26:06.986Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-05T15:26:06.986Z"
             }
           ]
         }
