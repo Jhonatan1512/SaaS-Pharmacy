@@ -39,6 +39,8 @@ builder.Services.AddScoped<ILoteService, LoteService>();
 builder.Services.AddScoped<IInventarioSedeRepository, InventarioSedeRepository>();
 builder.Services.AddScoped<IInventarioSedeService, InventarioSedeService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<IClienteService, ClienteService>();
 
 //Identity
 builder.Services.AddIdentity<Usuario, Role>(options =>

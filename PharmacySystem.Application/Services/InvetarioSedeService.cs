@@ -11,20 +11,14 @@ public class InventarioSedeService : IInventarioSedeService
     private readonly IInventarioSedeRepository _inventarioSedeRepository;
     private readonly ISedeRepository _sedeRepository;
     private readonly ILoteRepository _loteRepository;
-    private readonly IUsuarioRepository _usuarioRepository;
     private readonly ICurrentUserService _currentUserService;
 
-    public InventarioSedeService(
-        IInventarioSedeRepository inventarioSedeRepository,
-        ISedeRepository sedeRepository,
-        ILoteRepository loteRepository,
-        IUsuarioRepository usuarioRepository,
+    public InventarioSedeService( IInventarioSedeRepository inventarioSedeRepository, ISedeRepository sedeRepository, ILoteRepository loteRepository,
         ICurrentUserService currentUserService)
     {
         _inventarioSedeRepository = inventarioSedeRepository;
         _sedeRepository = sedeRepository;
         _loteRepository = loteRepository;
-        _usuarioRepository = usuarioRepository;
         _currentUserService = currentUserService;
     }
 
@@ -88,10 +82,8 @@ public class InventarioSedeService : IInventarioSedeService
                 fechaRecepcion: fechaRecepcionUtc,
                 observacion: dto.Observacion
             );
-
             await _inventarioSedeRepository.EliminarRegistroAsync(inventarioEnTransito);
         }
-
         await _inventarioSedeRepository.ActualizarAsync();
     }
 
@@ -115,7 +107,6 @@ public class InventarioSedeService : IInventarioSedeService
                 precioBlister: dto.PrecioVentaBlister,
                 precioCaja: dto.PrecioVentaCaja
             );
-
             await _inventarioSedeRepository.EliminarRegistroAsync(inventarioActual);
         }
         else
@@ -127,7 +118,6 @@ public class InventarioSedeService : IInventarioSedeService
                 precioCaja: dto.PrecioVentaCaja
             );
         }
-
         await _inventarioSedeRepository.ActualizarAsync();
     }
 
@@ -138,7 +128,6 @@ public class InventarioSedeService : IInventarioSedeService
         {
             return Enumerable.Empty<InvetarioSedeResponseDto>();
         }
-
         return datosBd.Adapt<IEnumerable<InvetarioSedeResponseDto>>();
     }
 
@@ -158,7 +147,22 @@ public class InventarioSedeService : IInventarioSedeService
             dto.NuevaCantidadDanada,
             dto.MotivoCorreccion
         );
-
         await _inventarioSedeRepository.ActualizarAsync();
+    }
+
+    public async Task<IEnumerable<InvetarioSedeResponseDto>> GetInvetarioMiSedeAsync()
+    {
+        Guid? userSedeId = _currentUserService.GetSedeId();
+        if (!userSedeId.HasValue)
+        {
+            throw new UnauthorizedAccessException("El usuario autenticado no tiene sede asignada");
+        }
+
+        var datosDb = await _inventarioSedeRepository.ObtenerPorSedeIdAsync(userSedeId.Value);
+        if( datosDb == null)
+        {
+            return Enumerable.Empty<InvetarioSedeResponseDto>();
+        }
+        return datosDb.Adapt<List<InvetarioSedeResponseDto>>();
     }
 }

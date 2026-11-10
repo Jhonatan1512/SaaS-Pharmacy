@@ -59,6 +59,14 @@ namespace PharmacySystem.Api.Controllers
             return NoContent(); 
         }
 
+        [HttpGet("mi-inventario")]
+        [Authorize(Roles = "Farmaceutico")]
+        public async Task<ActionResult<IEnumerable<InvetarioSedeResponseDto>>> GetMiInventario()
+        {
+            var inventario = await _inventarioSedeService.GetInvetarioMiSedeAsync();
+            return Ok(inventario);
+        }
+
         private Guid UsuarioId => _currentUser.GetUserId();
     }
 }

@@ -3,26 +3,26 @@
   "WorkspaceRootPath": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\services\\invetariosedeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\dtos\\clientedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B30EABA-0938-4E4C-816B-9D8C8AFC769E}|..\\PharmacySystem.Domain\\PharmacySystem.Domain.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.domain\\entities\\inventariosede.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C65D1E3B-DA29-4760-BCBA-F7BC2583EB15}|PharmacySystem.Api.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C65D1E3B-DA29-4760-BCBA-F7BC2583EB15}|PharmacySystem.Api.csproj|solutionrelative:controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C65D1E3B-DA29-4760-BCBA-F7BC2583EB15}|PharmacySystem.Api.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem\\controllers\\inventariosedecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C65D1E3B-DA29-4760-BCBA-F7BC2583EB15}|PharmacySystem.Api.csproj|solutionrelative:controllers\\inventariosedecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\services\\clienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\dtos\\inventariosededto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\interfaces\\iclienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CDC0E9B-5E6D-45D2-A9FB-36E64CA379F5}|..\\PharmacySystem.Application\\PharmacySystem.Application.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.application\\interfaces\\iinventariosedeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9B30EABA-0938-4E4C-816B-9D8C8AFC769E}|..\\PharmacySystem.Domain\\PharmacySystem.Domain.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.domain\\entities\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F0BE6B45-980B-43AC-B1C7-16DF711DD237}|..\\PharmacySystem.Infrastructure\\PharmacySystem.Infrastructure.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.infrastructure\\repositories\\inventariosederepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F0BE6B45-980B-43AC-B1C7-16DF711DD237}|..\\PharmacySystem.Infrastructure\\PharmacySystem.Infrastructure.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.infrastructure\\repositories\\clienterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B30EABA-0938-4E4C-816B-9D8C8AFC769E}|..\\PharmacySystem.Domain\\PharmacySystem.Domain.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.domain\\interfaces\\iinventariosederepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9B30EABA-0938-4E4C-816B-9D8C8AFC769E}|..\\PharmacySystem.Domain\\PharmacySystem.Domain.csproj|d:\\.net-pharmacy-system\\api-backend\\pharmacysystem.domain\\interfaces\\iclienterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -32,7 +32,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -49,92 +49,92 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "InventarioSede.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Entities\\InventarioSede.cs",
-              "RelativeDocumentMoniker": "..\\PharmacySystem.Domain\\Entities\\InventarioSede.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Entities\\InventarioSede.cs",
-              "RelativeToolTip": "..\\PharmacySystem.Domain\\Entities\\InventarioSede.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGEAAAAkAAAAAAAAAA==",
+              "Title": "ClienteController.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\Controllers\\ClienteController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClienteController.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\Controllers\\ClienteController.cs",
+              "RelativeToolTip": "Controllers\\ClienteController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-09T21:20:22.994Z",
+              "WhenOpened": "2026-11-10T22:52:49.573Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "InventarioSedeController.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\Controllers\\InventarioSedeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\InventarioSedeController.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem\\Controllers\\InventarioSedeController.cs",
-              "RelativeToolTip": "Controllers\\InventarioSedeController.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAqwDQAAAAjAAAAAAAAAA==",
+              "Title": "ClienteService.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Services\\ClienteService.cs",
+              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\Services\\ClienteService.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Services\\ClienteService.cs",
+              "RelativeToolTip": "..\\PharmacySystem.Application\\Services\\ClienteService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T21:24:08.921Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "InvetarioSedeService.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Services\\InvetarioSedeService.cs",
-              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\Services\\InvetarioSedeService.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Services\\InvetarioSedeService.cs",
-              "RelativeToolTip": "..\\PharmacySystem.Application\\Services\\InvetarioSedeService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T15:47:57.16Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IInventarioSedeService.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Interfaces\\IInventarioSedeService.cs",
-              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\Interfaces\\IInventarioSedeService.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Interfaces\\IInventarioSedeService.cs",
-              "RelativeToolTip": "..\\PharmacySystem.Application\\Interfaces\\IInventarioSedeService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T15:45:33.727Z",
+              "WhenOpened": "2026-11-10T22:48:54.645Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "InventarioSedeDto.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\DTOs\\InventarioSedeDto.cs",
-              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\DTOs\\InventarioSedeDto.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\DTOs\\InventarioSedeDto.cs",
-              "RelativeToolTip": "..\\PharmacySystem.Application\\DTOs\\InventarioSedeDto.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAQwDYAAAAFAAAAAAAAAA==",
+              "Title": "IClienteService.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Interfaces\\IClienteService.cs",
+              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\Interfaces\\IClienteService.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\Interfaces\\IClienteService.cs",
+              "RelativeToolTip": "..\\PharmacySystem.Application\\Interfaces\\IClienteService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T15:44:21.146Z",
+              "WhenOpened": "2026-11-10T22:45:41.588Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ClienteDto.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\DTOs\\ClienteDto.cs",
+              "RelativeDocumentMoniker": "..\\PharmacySystem.Application\\DTOs\\ClienteDto.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Application\\DTOs\\ClienteDto.cs",
+              "RelativeToolTip": "..\\PharmacySystem.Application\\DTOs\\ClienteDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T22:39:50.001Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "InventarioSedeRepository.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Infrastructure\\Repositories\\InventarioSedeRepository.cs",
-              "RelativeDocumentMoniker": "..\\PharmacySystem.Infrastructure\\Repositories\\InventarioSedeRepository.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Infrastructure\\Repositories\\InventarioSedeRepository.cs",
-              "RelativeToolTip": "..\\PharmacySystem.Infrastructure\\Repositories\\InventarioSedeRepository.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAiwEsAAAAAAAAAAAAAAA==",
+              "Title": "ClienteRepository.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Infrastructure\\Repositories\\ClienteRepository.cs",
+              "RelativeDocumentMoniker": "..\\PharmacySystem.Infrastructure\\Repositories\\ClienteRepository.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Infrastructure\\Repositories\\ClienteRepository.cs",
+              "RelativeToolTip": "..\\PharmacySystem.Infrastructure\\Repositories\\ClienteRepository.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAcwDgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T15:27:16.19Z",
+              "WhenOpened": "2026-11-10T21:26:09.561Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Entities\\Cliente.cs",
+              "RelativeDocumentMoniker": "..\\PharmacySystem.Domain\\Entities\\Cliente.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Entities\\Cliente.cs",
+              "RelativeToolTip": "..\\PharmacySystem.Domain\\Entities\\Cliente.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-10T21:15:30.888Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "IInventarioSedeRepository.cs",
-              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Interfaces\\IInventarioSedeRepository.cs",
-              "RelativeDocumentMoniker": "..\\PharmacySystem.Domain\\Interfaces\\IInventarioSedeRepository.cs",
-              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Interfaces\\IInventarioSedeRepository.cs",
-              "RelativeToolTip": "..\\PharmacySystem.Domain\\Interfaces\\IInventarioSedeRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAoAAAAAAAAAA==",
+              "Title": "IClienteRepository.cs",
+              "DocumentMoniker": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Interfaces\\IClienteRepository.cs",
+              "RelativeDocumentMoniker": "..\\PharmacySystem.Domain\\Interfaces\\IClienteRepository.cs",
+              "ToolTip": "D:\\.NET-PHARMACY-SYSTEM\\Api-Backend\\PharmacySystem.Domain\\Interfaces\\IClienteRepository.cs",
+              "RelativeToolTip": "..\\PharmacySystem.Domain\\Interfaces\\IClienteRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-05T15:26:06.986Z",
+              "WhenOpened": "2026-11-10T20:44:58.046Z",
               "EditorCaption": ""
             }
           ]

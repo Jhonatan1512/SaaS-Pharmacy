@@ -14,5 +14,6 @@ namespace PharmacySystem.Application.Interfaces
         Task ActualizarInvetarioSedeAsync(Guid inventarioSedeId, CorregirPrecioInventarioSedeDto dto);
         Task ConfirmarRecepcionAsync(Guid userId, Guid inventarioSedeId, ConfirmarRecepcionInventarioDto dto);
         Task CorregirMermaRecepcionAsync(Guid userId, Guid inventarioSedeId, CorregirRecepcionDto dto);
+        Task<IEnumerable<InvetarioSedeResponseDto>> GetInvetarioMiSedeAsync();
     }
 }

@@ -16,6 +16,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "PharmacySystem.Api.Controllers.ClienteController",
+    "Method": "CrearCliente",
+    "RelativePath": "api/Cliente/crear-cliente",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PharmacySystem.Application.DTOs.ClienteDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "PharmacySystem.Api.Controllers.InventarioSedeController",
     "Method": "ConfirmarRecepcion",
     "RelativePath": "api/InventarioSede/confirmar-recepcion/{id}",
@@ -109,6 +125,26 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PharmacySystem.Api.Controllers.InventarioSedeController",
+    "Method": "GetMiInventario",
+    "RelativePath": "api/InventarioSede/mi-inventario",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[PharmacySystem.Application.DTOs.InvetarioSedeResponseDto, PharmacySystem.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "PharmacySystem.Api.Controllers.LoteController",

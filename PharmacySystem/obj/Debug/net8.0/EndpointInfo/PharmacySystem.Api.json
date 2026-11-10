@@ -36,6 +36,37 @@
         }
       }
     },
+    "/api/Cliente/crear-cliente": {
+      "post": {
+        "tags": [
+          "Cliente"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClienteDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClienteDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClienteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/InventarioSede/crear-invetario": {
       "post": {
         "tags": [
@@ -212,6 +243,44 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/InventarioSede/mi-inventario": {
+      "get": {
+        "tags": [
+          "InventarioSede"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InvetarioSedeResponseDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InvetarioSedeResponseDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InvetarioSedeResponseDto"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -687,6 +756,31 @@
         },
         "additionalProperties": false
       },
+      "ClienteDto": {
+        "type": "object",
+        "properties": {
+          "tipoDocumento": {
+            "$ref": "#/components/schemas/TipoDoc"
+          },
+          "numeroDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombresRazonSocial": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ConfirmarRecepcionInventarioDto": {
         "type": "object",
         "properties": {
@@ -779,6 +873,74 @@
           },
           "estado": {
             "$ref": "#/components/schemas/EstadoLoteSedeEnum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InvetarioSedeResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "sedeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "nombreSede": {
+            "type": "string",
+            "nullable": true
+          },
+          "loteId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "codigoLote": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreProducto": {
+            "type": "string",
+            "nullable": true
+          },
+          "stockFisicoUnidades": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "precioVentaUnidad": {
+            "type": "number",
+            "format": "double"
+          },
+          "precioVentaBlister": {
+            "type": "number",
+            "format": "double"
+          },
+          "precioVentaCaja": {
+            "type": "number",
+            "format": "double"
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaRecepcion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuarioRecibeId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "nombreUsuarioRecibe": {
+            "type": "string",
+            "nullable": true
+          },
+          "observacionRecepcion": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -909,6 +1071,14 @@
           }
         },
         "additionalProperties": false
+      },
+      "TipoDoc": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "TipoDocumento": {
         "enum": [
