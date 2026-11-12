@@ -45,6 +45,9 @@ namespace PharmacySystem.Application.Mappings
             TypeAdapterConfig<ClienteUpdateDto, Cliente>
                 .NewConfig()
                 .IgnoreNullValues(true);
+
+            TypeAdapterConfig<SerieComprobante, SerieComprobanteResponseDto>.NewConfig()
+                .Map(dest => dest.NombreSede, src => src.Sede.Nombre);
         }
     }
 }

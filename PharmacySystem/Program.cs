@@ -41,6 +41,8 @@ builder.Services.AddScoped<IInventarioSedeService, InventarioSedeService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddScoped<ISerieComprobanteRepository, SerieComprobanteRepository>();
+builder.Services.AddScoped<ISerieComprobanteService, SerieComprobanteService>();
 
 //Identity
 builder.Services.AddIdentity<Usuario, Role>(options =>
