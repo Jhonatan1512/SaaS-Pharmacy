@@ -483,8 +483,13 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 
-# Archivos de configuración con credenciales
-appsettings*.json
+# Compilación de .NET
+**/bin/
+**/obj/
 
-# Carpeta de migraciones de EF Core
+# Archivos de configuración con credenciales
+**/appsettings.json
+**/appsettings.*.json
+
+# Migraciones de EF Core
 **/Migrations/
