@@ -41,6 +41,10 @@ namespace PharmacySystem.Application.Mappings
                 .Map(dest => dest.CodigoLote, src => src.Lote.CodigoLote) 
                 .Map(dest => dest.NombreProducto, src => src.Lote.Producto.NombreComercial)
                 .Map(dest => dest.NombreUsuarioRecibe, src => src.UsuarioRecibe != null ? src.UsuarioRecibe.NombreCompletoRazonSocial : null);
+
+            TypeAdapterConfig<ClienteUpdateDto, Cliente>
+                .NewConfig()
+                .IgnoreNullValues(true);
         }
     }
 }

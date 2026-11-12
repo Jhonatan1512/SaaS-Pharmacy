@@ -12,7 +12,7 @@ namespace PharmacySystem.Domain.Entities
         public Guid Id { get; set; } = Guid.NewGuid();
         public Guid SedeId { get; set; }
         public TipoComprobanteEnum TipoComprobante { get; set; } 
-        public string Serie { get; set; } = string.Empty;            // Ej: F001, B001, NV01
+        public string Serie { get; set; } = string.Empty;            
         public int UltimoCorrelativo { get; set; } = 0;
         public bool Activo { get; set; } = true;
 

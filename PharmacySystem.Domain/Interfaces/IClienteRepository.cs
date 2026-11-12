@@ -11,10 +11,10 @@ namespace PharmacySystem.Domain.Interfaces
     {
         Task<IEnumerable<Cliente>> ObtenerTodosAsync(string? busqueda = null);
         Task<Cliente?> ObtenerPorIdAsync(Guid id);
-        Task<Cliente?> ObtenerPorDocumentoAsync(TipoDoc tipoDoc, string numeroDocumento);
+        Task<Cliente?> ObtenerPorDocumentoAsync(string numeroDocumento);
         Task<bool> ExisteDocumentoAsync(TipoDoc tipoDoc, string numeroDocumento, Guid? ignorarId = null);
         Task CrearAsync(Cliente cliente);
-        Task Actualizar(Cliente cliente);
+        Task ActualizarAsync(Cliente cliente);
         Task Eliminar(Cliente cliente);
     }
 }

@@ -10,11 +10,11 @@ namespace PharmacySystem.Application.Interfaces
 {
     public interface IClienteService
     {
-        //Task<IEnumerable<ClienteResponseDto>> ObtenerTodosAsync(string? busqueda = null);
-        //Task<ClienteResponseDto> ObtenerPorIdAsync(Guid id);
-        //Task<ClienteResponseDto> ObtenerPorDocumentoAsync(TipoDoc tipoDoc, string numeroDocumento);
+        Task<IEnumerable<ClienteResponseDto>> ObtenerTodosAsync(string? busqueda = null);
+        Task<ClienteResponseDto> ObtenerPorIdAsync(Guid id);
+        Task<ClienteResponseDto> ObtenerPorDocumentoAsync(string numeroDocumento);
         Task CrearAsync(ClienteDto dto);
-        //Task ActualizarAsync(Guid id, ClienteUpdateDto dto);
-        //Task EliminarAsync(Guid id);
+        Task ActualizarAsync(Guid id, ClienteUpdateDto dto);
+        Task EliminarAsync(Guid id);
     }
 }

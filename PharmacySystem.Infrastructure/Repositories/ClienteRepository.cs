@@ -17,7 +17,7 @@ namespace PharmacySystem.Infrastructure.Repositories
         {
             _context = context;
         }
-        public async Task Actualizar(Cliente cliente)
+        public async Task ActualizarAsync(Cliente cliente)
         {
             _context.Clientes.Update(cliente);
             await _context.SaveChangesAsync();
@@ -28,7 +28,7 @@ namespace PharmacySystem.Infrastructure.Repositories
             _context.Clientes.Add(cliente);
             await _context.SaveChangesAsync();
         }
-
+         
         public async Task Eliminar(Cliente cliente)
         {
             _context.Clientes.Remove(cliente);
@@ -43,11 +43,11 @@ namespace PharmacySystem.Infrastructure.Repositories
                                 (!ignorarId.HasValue || c.Id != ignorarId.Value));
         }
 
-        public async Task<Cliente?> ObtenerPorDocumentoAsync(TipoDoc tipoDoc, string numeroDocumento)
+        public async Task<Cliente?> ObtenerPorDocumentoAsync(string numeroDocumento)
         {
             return await _context.Clientes
                 .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.TipoDocumento == tipoDoc && c.NumeroDocumento == numeroDocumento);
+                .FirstOrDefaultAsync(c => c.NumeroDocumento == numeroDocumento);
         }
 
         public async Task<Cliente?> ObtenerPorIdAsync(Guid id)
