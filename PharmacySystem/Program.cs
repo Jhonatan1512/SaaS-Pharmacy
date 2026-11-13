@@ -43,6 +43,8 @@ builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<ISerieComprobanteRepository, SerieComprobanteRepository>();
 builder.Services.AddScoped<ISerieComprobanteService, SerieComprobanteService>();
+builder.Services.AddScoped<ITurnoCajaRepository, TurnoCajaRepository>();
+builder.Services.AddScoped<ITurnoCajaService, TurnoCajaService>();
 
 //Identity
 builder.Services.AddIdentity<Usuario, Role>(options =>

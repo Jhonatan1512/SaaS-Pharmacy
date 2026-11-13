@@ -48,6 +48,10 @@ namespace PharmacySystem.Application.Mappings
 
             TypeAdapterConfig<SerieComprobante, SerieComprobanteResponseDto>.NewConfig()
                 .Map(dest => dest.NombreSede, src => src.Sede.Nombre);
+
+            TypeAdapterConfig<TurnoCaja, TurnoCajaResponseDto>.NewConfig()
+                .Map(dest => dest.NombreSede, src => src.Sede != null ? src.Sede.Nombre : string.Empty)
+                .Map(dest => dest.NombreUsuario, src => src.Usuario != null ? src.Usuario.NombreCompletoRazonSocial : string.Empty);
         }
     }
 }
