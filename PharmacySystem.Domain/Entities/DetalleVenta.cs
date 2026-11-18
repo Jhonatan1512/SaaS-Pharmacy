@@ -18,7 +18,7 @@ namespace PharmacySystem.Domain.Entities
         public int CantidadUnidadesMinimas { get; set; }
 
         // Precios e Impuestos SUNAT por línea
-        public string TipoAfectacionIgv { get; set; } = "10"; // "10"=Gravado, "20"=Exonerado
+        public TipoAfectacionIgvEnum TipoAfectacionIgv { get; set; } = TipoAfectacionIgvEnum.Gravado; 
         public decimal PorcentajeIgv { get; set; } = 18.00m;
         public decimal ValorUnitarioSinIgv { get; set; }
         public decimal PrecioUnitarioConIgv { get; set; }

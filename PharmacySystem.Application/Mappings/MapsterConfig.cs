@@ -52,6 +52,17 @@ namespace PharmacySystem.Application.Mappings
             TypeAdapterConfig<TurnoCaja, TurnoCajaResponseDto>.NewConfig()
                 .Map(dest => dest.NombreSede, src => src.Sede != null ? src.Sede.Nombre : string.Empty)
                 .Map(dest => dest.NombreUsuario, src => src.Usuario != null ? src.Usuario.NombreCompletoRazonSocial : string.Empty);
+
+            
+            //TypeAdapterConfig<Venta, VentasDto>.NewConfig()
+            //    .Map(dest => dest.NombreSede, src => src.Sede != null ? src.Sede.Nombre : string.Empty)
+            //    .Map(dest => dest.NombreFarmaceutico, src => src.Usuario != null ? src.Usuario.Nombres : string.Empty)
+            //    .Map(dest => dest.ClienteNombre, src => src.Cliente != null ? src.Cliente.NombresRazonSocial : "CLIENTES VARIOS")
+            //    .Map(dest => dest.ClienteDocumento, src => src.Cliente != null ? src.Cliente.NumeroDocumento : null);
+
+            //TypeAdapterConfig<DetalleVenta, DetalleVentaResponseDto>.NewConfig()
+            //    .Map(dest => dest.NombreProducto, src => src.InventarioSede != null ? src.InventarioSede.Lote.Producto.Nombre : string.Empty)
+            //    .Map(dest => dest.NumeroLote, src => src.InventarioSede != null ? src.InventarioSede.Lote.NumeroLote : string.Empty);
         }
     }
 }

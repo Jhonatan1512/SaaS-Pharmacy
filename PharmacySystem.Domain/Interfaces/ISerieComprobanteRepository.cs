@@ -17,5 +17,6 @@ namespace PharmacySystem.Domain.Interfaces
         Task CrearAsync(SerieComprobante serieComprobante);
         Task<IEnumerable<string>> ObtenerCodigosSeriePorSedeYTipoAsync(Guid sedeId, TipoComprobanteEnum tipoComprobante);
         Task ActualizarEstadoSerieAsync(SerieComprobante serieComprobante);
+        Task<SerieComprobante?> ObtenerSerieActivaPorSedeYTipoAsync(Guid sedeId, TipoComprobanteEnum tipoComprobante);
     }
 }

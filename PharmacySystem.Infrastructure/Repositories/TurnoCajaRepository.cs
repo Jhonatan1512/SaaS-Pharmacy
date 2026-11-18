@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PharmacySystem.Domain.Entities;
+using PharmacySystem.Domain.Enums;
 using PharmacySystem.Domain.Interfaces;
 using PharmacySystem.Infrastructure.Data;
 using System;
@@ -49,8 +50,24 @@ namespace PharmacySystem.Infrastructure.Repositories
 
         public async Task<TotalesVentasTurno> ObtenerTotalesVentasPorTurnoAsync(Guid turnoId)
         {
-            await Task.CompletedTask;
-            return new TotalesVentasTurno(0m, 0m, 0m, 0m);
+            var totalesPorMedio = await _context.Ventas
+                .AsNoTracking()
+                .Where(v => v.TurnoCajaId == turnoId && !v.Anulado)
+                .SelectMany(v => v.Pagos)
+                .GroupBy(p => p.MedioPago)
+                .Select(g => new
+                {
+                    MedioPago = g.Key,
+                    Total = g.Sum(p => p.Monto)
+                })
+                .ToListAsync();
+
+            decimal efectivo = totalesPorMedio.FirstOrDefault(t => t.MedioPago == MedioPagoEnum.Efectivo)?.Total ?? 0m;
+            decimal yape = totalesPorMedio.FirstOrDefault(t => t.MedioPago == MedioPagoEnum.Yape)?.Total ?? 0m;
+            decimal plin = totalesPorMedio.FirstOrDefault(t => t.MedioPago == MedioPagoEnum.Plin)?.Total ?? 0m;
+            decimal tarjeta = totalesPorMedio.FirstOrDefault(t => t.MedioPago == MedioPagoEnum.Tarjeta)?.Total ?? 0m;
+
+            return new TotalesVentasTurno(efectivo, yape, plin, tarjeta);
         }
 
         public async Task<TurnoCaja?> ObtenerTurnoAbiertoPorUsuarioAsync(Guid usuarioId)

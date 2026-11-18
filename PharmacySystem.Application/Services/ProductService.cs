@@ -59,9 +59,9 @@ namespace PharmacySystem.Application.Services
             var existeCodigoBarras = await _productoRepository.ObtenerPorCodigoBarrasAsync(dto.CodigoBarras!);
             if (existeCodigoBarras != null) throw new InvalidOperationException("El código de barras ya esta registrado");
 
-            if (dto.UnidadesPorCaja <= 0 || dto.UnidadesPorBlister <= 0)
+            if (dto.UnidadesPorCaja < 0 || dto.UnidadesPorBlister < 0)
             {
-                throw new ArgumentException("Los factores de conversión (unidades por caja/blister) deben ser mayores a 0.");
+                throw new ArgumentException("Los factores de conversión (unidades por caja/blister) no pueden ser negativos.");
             }
 
             var nuevoProducto = dto.Adapt<Producto>();

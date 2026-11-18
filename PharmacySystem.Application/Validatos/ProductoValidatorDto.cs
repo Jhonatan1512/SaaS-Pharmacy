@@ -51,10 +51,10 @@ namespace PharmacySystem.Application.Validatos
                 .WithMessage("El tipo de afectación de IGV no es válido (Valores permitidos: 10, 20, 30).");
 
             RuleFor(x => x.UnidadesPorCaja)
-                .GreaterThan(0).WithMessage("La cantidad de unidades por caja debe ser mayor a 0.");
+                .GreaterThanOrEqualTo(0).WithMessage("La cantidad de unidades por caja debe no puede ser menor a 0.");
 
             RuleFor(x => x.UnidadesPorBlister)
-                .GreaterThan(0).WithMessage("La cantidad de unidades por blíster debe ser mayor a 0.")
+                .GreaterThanOrEqualTo(0).WithMessage("La cantidad de unidades por blíster no puede ser menor a 0.")
                 .LessThanOrEqualTo(x => x.UnidadesPorCaja)
                 .WithMessage("Las unidades por blíster no pueden superar las unidades por caja.");
 

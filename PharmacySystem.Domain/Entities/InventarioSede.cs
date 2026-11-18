@@ -26,7 +26,7 @@ public class InventarioSede
     public Lote Lote { get; set; } = null!;
     public Usuario? UsuarioRecibe { get; set; }
 
-    /// Reabastece el stock y absorbe las mermas y datos de recepción al fusionar capas.
+    // Reabastece el stock y absorbe las mermas y datos de recepción al fusionar capas.
     public void ReabastecerStock(
         int cantidad,
         int cantidadDanada = 0,

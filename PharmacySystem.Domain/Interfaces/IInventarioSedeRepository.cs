@@ -19,5 +19,8 @@ namespace PharmacySystem.Domain.Interfaces
         Task<InventarioSede?> ObtenerPorIdAsync(Guid id);
         Task<InventarioSede?> ObtenerPorSedeLotePrecioYEstadoAsync(Guid sedeId, Guid loteId, decimal precioVentaUnidad, EstadoLoteSedeEnum estado);
         Task<IEnumerable<InventarioSede>> ObtenerPorSedeIdAsync(Guid sedeId);
+        Task<List<InventarioSede>> ObtenerPorIdsParaVentaAsync(IEnumerable<Guid> ids);
+        Task DescontarStockSpAsync(Guid inventarioSedeId, Guid sedeId, int cantidadUnidadesMinimas);
     }
+
 }

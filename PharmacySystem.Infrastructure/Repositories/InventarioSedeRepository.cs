@@ -87,5 +87,32 @@ namespace PharmacySystem.Infrastructure.Repositories
                 .ThenBy(i => i.Lote.FechaVencimiento)
                 .ToListAsync();
         }
+
+        public async Task<List<InventarioSede>> ObtenerPorIdsParaVentaAsync(IEnumerable<Guid> ids)
+        {
+            return await _context.InventarioSedes
+                .AsNoTracking()
+                .Include(i => i.Lote)
+                    .ThenInclude(l => l.Producto)
+                .Where(i => ids.Contains(i.Id))
+                .ToListAsync();
+        }
+
+        public async Task DescontarStockSpAsync(Guid inventarioSedeId, Guid sedeId, int cantidadUnidadesMinimas)
+        {
+            try
+            {
+                int estadoActivo = (int)EstadoLoteSedeEnum.Activo;
+                int estadoAgotado = (int)EstadoLoteSedeEnum.Agotado;
+                DateTime fechaActual = DateTime.UtcNow.Date;
+
+                await _context.Database.ExecuteSqlInterpolatedAsync(
+                    $"EXEC sp_DescontarStockVenta @InventarioSedeId={inventarioSedeId}, @SedeId={sedeId}, @CantidadUnidadesMinimas={cantidadUnidadesMinimas}, @EstadoActivo={estadoActivo}, @EstadoAgotado={estadoAgotado}, @FechaActual={fechaActual}");
+            }
+            catch (Microsoft.Data.SqlClient.SqlException ex) when (ex.Number >= 50001 && ex.Number <= 50010)
+            {
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
     }
 }

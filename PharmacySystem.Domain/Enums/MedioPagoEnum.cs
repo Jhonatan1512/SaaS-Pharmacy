@@ -11,7 +11,6 @@ namespace PharmacySystem.Domain.Enums
         Efectivo = 1,
         Yape = 2,
         Plin = 3,
-        Tarjeta = 4,
-        Credito = 5
+        Tarjeta = 4
     }
 }

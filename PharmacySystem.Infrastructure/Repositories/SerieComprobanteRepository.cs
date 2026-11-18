@@ -73,5 +73,16 @@ namespace PharmacySystem.Infrastructure.Repositories
                 .ThenBy(s => s.Serie)
                 .ToListAsync();
         }
+
+        public async Task<SerieComprobante?> ObtenerSerieActivaPorSedeYTipoAsync(
+            Guid sedeId,
+            TipoComprobanteEnum tipoComprobante)
+        {
+            return await _context.SeriesComprobantes
+                .FirstOrDefaultAsync(s =>
+                    s.SedeId == sedeId &&
+                    s.TipoComprobante == tipoComprobante &&
+                    s.Activo);
+        }
     }
 }

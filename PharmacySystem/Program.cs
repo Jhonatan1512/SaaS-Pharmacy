@@ -45,6 +45,12 @@ builder.Services.AddScoped<ISerieComprobanteRepository, SerieComprobanteReposito
 builder.Services.AddScoped<ISerieComprobanteService, SerieComprobanteService>();
 builder.Services.AddScoped<ITurnoCajaRepository, TurnoCajaRepository>();
 builder.Services.AddScoped<ITurnoCajaService, TurnoCajaService>();
+builder.Services.AddScoped<IVentaRepository, VentaRepository>();
+builder.Services.AddScoped<IVentaService, VentaService>();
+builder.Services.AddScoped<IComprobanteValidacionService, ComprobanteValidacionService>();
+builder.Services.AddScoped<IPresentacionInventarioService, PresentacionInventarioService>();
+builder.Services.AddScoped<ICalculoTributarioVentaService, CalculoTributarioVentaService>();
+builder.Services.AddScoped<IProcesadorPagosVentaService, ProcesadorPagosVentaService>();
 
 //Identity
 builder.Services.AddIdentity<Usuario, Role>(options =>
