@@ -2,7 +2,7 @@ name: Build and Deploy PharmacySystem API
 
 on:
   push:
-    branches: [ main ] 
+    branches: [ main ]
 
 jobs:
   build_and_deploy:
@@ -33,10 +33,22 @@ jobs:
           $config | ConvertTo-Json -Depth 3 | Set-Content -Path "./publish/appsettings.Production.json" -Encoding UTF8
 
       - name: Desplegar en MonsterASP.NET
-        uses: rasmusbuchholdt/simply-web-deploy@2.2.0
-        with:
-          website-name: ${{ secrets.WEBSITE_NAME }}
-          server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
-          server-username: ${{ secrets.SERVER_USERNAME }}
-          server-password: ${{ secrets.SERVER_PASSWORD }}
-          source-path: './publish'
+        shell: pwsh
+        env:
+          WEBSITE_NAME: ${{ secrets.WEBSITE_NAME }}
+          SERVER_COMPUTER_NAME: ${{ secrets.SERVER_COMPUTER_NAME }}
+          SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+        run: |
+          $msdeploy = "C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"
+          if (-not (Test-Path $msdeploy)) {
+            $msdeploy = (Get-ChildItem "C:\Program Files*\IIS\Microsoft Web Deploy*\msdeploy.exe" | Select-Object -First 1).FullName
+          }
+          $sourcePath = (Resolve-Path "./publish").Path
+          & $msdeploy `
+            -verb:sync `
+            -source:contentPath="$sourcePath" `
+            -dest:contentPath="$env:WEBSITE_NAME",computerName="$env:SERVER_COMPUTER_NAME",userName="$env:SERVER_USERNAME",password="$env:SERVER_PASSWORD",authtype="Basic" `
+            -enableRule:AppOffline `
+            -allowUntrusted
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
