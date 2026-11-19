@@ -24,10 +24,16 @@ jobs:
         shell: pwsh
         env:
           DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+          JWT_KEY: ${{ secrets.JWT_KEY }}
         run: |
           $config = @{
             ConnectionStrings = @{
               DefaultConexion = $env:DB_CONNECTION_STRING
+            }
+            Jwt = @{
+              Key = $env:JWT_KEY
+              Issuer = "PharmacySystem2026"
+              Audience = "PharmacySystemaUsers"
             }
           }
           $config | ConvertTo-Json -Depth 3 | Set-Content -Path "./publish/appsettings.Production.json" -Encoding UTF8
