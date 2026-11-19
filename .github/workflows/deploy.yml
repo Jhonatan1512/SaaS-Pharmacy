@@ -1,0 +1,42 @@
+name: Build and Deploy PharmacySystem API
+
+on:
+  push:
+    branches: [ main ] 
+
+jobs:
+  build_and_deploy:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Publicar API
+        run: dotnet publish PharmacySystem/PharmacySystem.Api.csproj -c Release -o ./publish
+
+      - name: Generar appsettings.Production.json
+        shell: pwsh
+        env:
+          DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+        run: |
+          $config = @{
+            ConnectionStrings = @{
+              DefaultConexion = $env:DB_CONNECTION_STRING
+            }
+          }
+          $config | ConvertTo-Json -Depth 3 | Set-Content -Path "./publish/appsettings.Production.json" -Encoding UTF8
+
+      - name: Desplegar en MonsterASP.NET
+        uses: rasmusbuchholdt/simply-web-deploy@2.2.0
+        with:
+          website-name: ${{ secrets.WEBSITE_NAME }}
+          server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
+          server-username: ${{ secrets.SERVER_USERNAME }}
+          server-password: ${{ secrets.SERVER_PASSWORD }}
+          source-path: './publish'

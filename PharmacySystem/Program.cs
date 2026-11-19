@@ -139,7 +139,9 @@ builder.Services.AddValidatorsFromAssemblyContaining<SedeValidatorDto>();
 
 //BD Conexion
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConexion")));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConexion"),
+        sqlOptions => sqlOptions.EnableRetryOnFailure()));
 
 var app = builder.Build();
 
@@ -158,5 +160,11 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    dbContext.Database.Migrate();
+}
 
 app.Run();
