@@ -16,155 +16,170 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using PharmacySystem.Application.Mappings;
 
-var builder = WebApplication.CreateBuilder(args);
+string? startupError = null;
+WebApplication? app = null;
 
-// Add services to the container.
-builder.Services.AddMemoryCache();
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<ISedeRepository, SedeRepository>();
-builder.Services.AddScoped<ISedeService, SedeService>();
-builder.Services.AddScoped<IIdentityUserService, IdentityUserService>();
-builder.Services.AddScoped<IUserService, UsuarioService>();
-builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddScoped<ICredencialesFermaceutico, CredencialesFarmaceutico>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<ITokenBlackListService, TokenBlackListService>();
-builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
-builder.Services.AddScoped<IProductoService, ProductService>();
-builder.Services.AddScoped<ILoteRepository, LoteRepository>();
-builder.Services.AddScoped<ILoteService, LoteService>();
-builder.Services.AddScoped<IInventarioSedeRepository, InventarioSedeRepository>();
-builder.Services.AddScoped<IInventarioSedeService, InventarioSedeService>();
-builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
-builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
-builder.Services.AddScoped<IClienteService, ClienteService>();
-builder.Services.AddScoped<ISerieComprobanteRepository, SerieComprobanteRepository>();
-builder.Services.AddScoped<ISerieComprobanteService, SerieComprobanteService>();
-builder.Services.AddScoped<ITurnoCajaRepository, TurnoCajaRepository>();
-builder.Services.AddScoped<ITurnoCajaService, TurnoCajaService>();
-builder.Services.AddScoped<IVentaRepository, VentaRepository>();
-builder.Services.AddScoped<IVentaService, VentaService>();
-builder.Services.AddScoped<IComprobanteValidacionService, ComprobanteValidacionService>();
-builder.Services.AddScoped<IPresentacionInventarioService, PresentacionInventarioService>();
-builder.Services.AddScoped<ICalculoTributarioVentaService, CalculoTributarioVentaService>();
-builder.Services.AddScoped<IProcesadorPagosVentaService, ProcesadorPagosVentaService>();
-
-//Identity
-builder.Services.AddIdentity<Usuario, Role>(options =>
+try
 {
-    options.Password.RequireDigit = true;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireUppercase = false;
-    options.Password.RequiredLength = 6;
-})
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+    var builder = WebApplication.CreateBuilder(args);
 
-//login (token)
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+    // Add services to the container.
+    builder.Services.AddMemoryCache();
+    builder.Services.AddControllers();
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+    builder.Services.AddScoped<ISedeRepository, SedeRepository>();
+    builder.Services.AddScoped<ISedeService, SedeService>();
+    builder.Services.AddScoped<IIdentityUserService, IdentityUserService>();
+    builder.Services.AddScoped<IUserService, UsuarioService>();
+    builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+    builder.Services.AddScoped<ICredencialesFermaceutico, CredencialesFarmaceutico>();
+    builder.Services.AddScoped<IAuthService, AuthService>();
+    builder.Services.AddScoped<ITokenBlackListService, TokenBlackListService>();
+    builder.Services.AddScoped<ITokenService, TokenService>();
+    builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
+    builder.Services.AddScoped<IProductoService, ProductService>();
+    builder.Services.AddScoped<ILoteRepository, LoteRepository>();
+    builder.Services.AddScoped<ILoteService, LoteService>();
+    builder.Services.AddScoped<IInventarioSedeRepository, InventarioSedeRepository>();
+    builder.Services.AddScoped<IInventarioSedeService, InventarioSedeService>();
+    builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+    builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+    builder.Services.AddScoped<IClienteService, ClienteService>();
+    builder.Services.AddScoped<ISerieComprobanteRepository, SerieComprobanteRepository>();
+    builder.Services.AddScoped<ISerieComprobanteService, SerieComprobanteService>();
+    builder.Services.AddScoped<ITurnoCajaRepository, TurnoCajaRepository>();
+    builder.Services.AddScoped<ITurnoCajaService, TurnoCajaService>();
+    builder.Services.AddScoped<IVentaRepository, VentaRepository>();
+    builder.Services.AddScoped<IVentaService, VentaService>();
+    builder.Services.AddScoped<IComprobanteValidacionService, ComprobanteValidacionService>();
+    builder.Services.AddScoped<IPresentacionInventarioService, PresentacionInventarioService>();
+    builder.Services.AddScoped<ICalculoTributarioVentaService, CalculoTributarioVentaService>();
+    builder.Services.AddScoped<IProcesadorPagosVentaService, ProcesadorPagosVentaService>();
 
-var jwtSettings = builder.Configuration.GetSection("Jwt");
-var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]!);
-
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-    .AddJwtBearer(options =>
+    //Identity
+    builder.Services.AddIdentity<Usuario, Role>(options =>
     {
-        options.TokenValidationParameters = new TokenValidationParameters
+        options.Password.RequireDigit = true;
+        options.Password.RequireLowercase = true;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredLength = 6;
+    })
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddDefaultTokenProviders();
+
+    //login (token)
+    var jwtSettings = builder.Configuration.GetSection("Jwt");
+    var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]!);
+
+    builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+        .AddJwtBearer(options =>
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = jwtSettings["Issuer"],
-            ValidAudience = jwtSettings["Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(key)
-        };
-        options.Events = new JwtBearerEvents
-        {
-            OnTokenValidated = async context =>
+            options.TokenValidationParameters = new TokenValidationParameters
             {
-                var blacklistService = context.HttpContext.RequestServices.GetRequiredService<ITokenBlackListService>();
-                string authHeader = context.Request.Headers["Authorization"].ToString();
-
-                if (!string.IsNullOrEmpty(authHeader))
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = jwtSettings["Issuer"],
+                ValidAudience = jwtSettings["Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(key)
+            };
+            options.Events = new JwtBearerEvents
+            {
+                OnTokenValidated = async context =>
                 {
-                    string token = authHeader.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase)
-                        ? authHeader.Substring(7).Trim()
-                        : authHeader.Trim();
+                    var blacklistService = context.HttpContext.RequestServices.GetRequiredService<ITokenBlackListService>();
+                    string authHeader = context.Request.Headers["Authorization"].ToString();
 
-                    if (await blacklistService.EsTokenInvalidoAsync(token))
+                    if (!string.IsNullOrEmpty(authHeader))
                     {
-                        context.Fail("Token invalido, ha cerrado sesión");
+                        string token = authHeader.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase)
+                            ? authHeader.Substring(7).Trim()
+                            : authHeader.Trim();
 
-                        context.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                        context.HttpContext.Response.ContentType = "application/json";
-
-                        await context.HttpContext.Response.WriteAsJsonAsync(new
+                        if (await blacklistService.EsTokenInvalidoAsync(token))
                         {
-                            error = "Unauthorized",
-                            mensaje = "La sesión a expirado o fue cerrada"
-                        });
+                            context.Fail("Token invalido, ha cerrado sesión");
+
+                            context.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                            context.HttpContext.Response.ContentType = "application/json";
+
+                            await context.HttpContext.Response.WriteAsJsonAsync(new
+                            {
+                                error = "Unauthorized",
+                                mensaje = "La sesión a expirado o fue cerrada"
+                            });
+                        }
                     }
                 }
-            }
-        };
-    });
+            };
+        });
 
-//Mapster configuration
-var config = TypeAdapterConfig.GlobalSettings;
-builder.Services.AddSingleton(config);
-builder.Services.AddScoped<IMapper, ServiceMapper>();
-new MapsterConfig().RegisterMappings();
+    //Mapster configuration
+    var config = TypeAdapterConfig.GlobalSettings;
+    builder.Services.AddSingleton(config);
+    builder.Services.AddScoped<IMapper, ServiceMapper>();
+    new MapsterConfig().RegisterMappings();
 
-//Validators
-builder.Services.AddControllers(options =>
-{
-    options.Filters.Add<ValidationFilter>();
-})
-    .ConfigureApiBehaviorOptions(options =>
+    //Validators
+    builder.Services.AddControllers(options =>
     {
-        options.SuppressModelStateInvalidFilter = true;
-    });
-builder.Services.AddValidatorsFromAssemblyContaining<SedeValidatorDto>();
+        options.Filters.Add<ValidationFilter>();
+    })
+        .ConfigureApiBehaviorOptions(options =>
+        {
+            options.SuppressModelStateInvalidFilter = true;
+        });
+    builder.Services.AddValidatorsFromAssemblyContaining<SedeValidatorDto>();
 
-//BD Conexion
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConexion"),
-        sqlOptions => sqlOptions.EnableRetryOnFailure()));
+    //BD Conexion
+    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(
+            builder.Configuration.GetConnectionString("DefaultConexion"),
+            sqlOptions => sqlOptions.EnableRetryOnFailure()));
 
-var app = builder.Build();
+    app = builder.Build();
 
-app.UseMiddleware<ExceptionMiddleware>();
+    app.UseMiddleware<ExceptionMiddleware>();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    app.UseHttpsRedirection();
+
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        dbContext.Database.Migrate();
+    }
+}
+catch (Exception ex)
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    startupError = ex.ToString();
 }
 
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllers();
-
-using (var scope = app.Services.CreateScope())
+if (app == null || startupError != null)
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    dbContext.Database.Migrate();
+    var fallbackApp = WebApplication.Create(args);
+    fallbackApp.MapGet("/{**path}", () => Results.Text(startupError ?? "Error desconocido al iniciar la API", "text/plain; charset=utf-8"));
+    fallbackApp.Run();
+    return;
 }
 
 app.Run();
