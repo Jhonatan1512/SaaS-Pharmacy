@@ -491,5 +491,4 @@ $RECYCLE.BIN/
 **/appsettings.json
 **/appsettings.*.json
 
-# Migraciones de EF Core
-**/Migrations/
+
