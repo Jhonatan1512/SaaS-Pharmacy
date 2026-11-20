@@ -1,6 +1,7 @@
 ﻿using Mapster;
 using PharmacySystem.Application.DTOs;
 using PharmacySystem.Domain.Entities;
+using PharmacySystem.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,16 +54,17 @@ namespace PharmacySystem.Application.Mappings
                 .Map(dest => dest.NombreSede, src => src.Sede != null ? src.Sede.Nombre : string.Empty)
                 .Map(dest => dest.NombreUsuario, src => src.Usuario != null ? src.Usuario.NombreCompletoRazonSocial : string.Empty);
 
-            
-            //TypeAdapterConfig<Venta, VentasDto>.NewConfig()
-            //    .Map(dest => dest.NombreSede, src => src.Sede != null ? src.Sede.Nombre : string.Empty)
-            //    .Map(dest => dest.NombreFarmaceutico, src => src.Usuario != null ? src.Usuario.Nombres : string.Empty)
-            //    .Map(dest => dest.ClienteNombre, src => src.Cliente != null ? src.Cliente.NombresRazonSocial : "CLIENTES VARIOS")
-            //    .Map(dest => dest.ClienteDocumento, src => src.Cliente != null ? src.Cliente.NumeroDocumento : null);
+            TypeAdapterConfig<TotalesVentasTurno, ResumenTotalVentasTurnoActivoDto>.NewConfig()
+                .Map(dest => dest.TotalEfectivo, src => src.Efectivo)
+                .Map(dest => dest.TotalYape, src => src.Yape)
+                .Map(dest => dest.TotalPlin, src => src.Plin)
+                .Map(dest => dest.TotalTarjeta, src => src.Tarjeta);
 
-            //TypeAdapterConfig<DetalleVenta, DetalleVentaResponseDto>.NewConfig()
-            //    .Map(dest => dest.NombreProducto, src => src.InventarioSede != null ? src.InventarioSede.Lote.Producto.Nombre : string.Empty)
-            //    .Map(dest => dest.NumeroLote, src => src.InventarioSede != null ? src.InventarioSede.Lote.NumeroLote : string.Empty);
+            TypeAdapterConfig<Venta, VentaDelDiaDto>.NewConfig()
+                .Map(dest => dest.Comprobante, src => $"{src.Serie}-{src.Numero}")
+                .Map(dest => dest.Cliente, src => src.Cliente != null ? src.Cliente.NombresRazonSocial : "Público General")
+                .Map(dest => dest.MetodosPago, src => src.Pagos.Select(p => p.MedioPago.ToString()).ToList());
+
         }
     }
 }

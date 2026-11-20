@@ -23,11 +23,12 @@ namespace PharmacySystem.Application.Services
         private readonly IPresentacionInventarioService _presentacionService;
         private readonly ICalculoTributarioVentaService _calculoTributarioService;
         private readonly IProcesadorPagosVentaService _procesadorPagosService;
+        private readonly ICrearDetalleVentaService _crearDetalleVentaService;
         public VentaService(
         IVentaRepository ventaRepository, IInventarioSedeRepository inventarioRepository, ISerieComprobanteRepository serieRepository,
         ITurnoCajaRepository turnoRepository, IClienteRepository clienteRepository, ICurrentUserService currentUserService,
         IComprobanteValidacionService comprobanteValidacionService, IPresentacionInventarioService presentacionService, ICalculoTributarioVentaService calculoTributarioService, 
-        IProcesadorPagosVentaService procesadorPagosService)
+        IProcesadorPagosVentaService procesadorPagosService, ICrearDetalleVentaService crearDetalleVentaService)
         {
             _ventaRepository = ventaRepository;
             _inventarioSedeRepository = inventarioRepository;
@@ -39,6 +40,18 @@ namespace PharmacySystem.Application.Services
             _presentacionService = presentacionService;
             _calculoTributarioService = calculoTributarioService;
             _procesadorPagosService = procesadorPagosService;
+            _crearDetalleVentaService = crearDetalleVentaService;
+        }
+
+        public async Task AnularVentaAsync(Guid ventaId, AnularVentaDto dto)
+        {
+            Guid userSedeId = _currentUserService.GetSedeId();
+            if (userSedeId == Guid.Empty)
+            {
+                throw new UnauthorizedAccessException("El farmacéutico no tiene una sede asignada.");
+            }
+
+            await _ventaRepository.AnularVentaAsync(ventaId, userSedeId, dto.MotivoAnulacion);
         }
 
         public async Task RealizarVentaAsync(Guid userId, VentasDto dto)
@@ -84,47 +97,7 @@ namespace PharmacySystem.Application.Services
                     EstadoSunat = "NO_EMITIDO"
                 };
 
-                var detallesOrdenadosFefo = dto.Detalles
-                    .Select(item =>
-                    {
-                        if (!inventarioDict.TryGetValue(item.InventarioSedeId, out var inventario))
-                            throw new KeyNotFoundException($"El registro de inventario '{item.InventarioSedeId}' no existe.");
-
-                        return new { Item = item, Inventario = inventario };
-                    })
-                    .OrderBy(x => x.Inventario.Lote.FechaVencimiento)
-                    .ToList();
-
-                foreach (var entry in detallesOrdenadosFefo)
-                {
-                    var item = entry.Item;
-                    var inventario = entry.Inventario;
-
-                    int unidadesMinimas = _presentacionService.CalcularUnidadesMinimas(inventario, item.TipoUnidadVenta, item.CantidadVenta);
-                    decimal precioUnitarioConIgv = _presentacionService.ObtenerPrecioPorPresentacion(inventario, item.TipoUnidadVenta);
-
-                    await _inventarioSedeRepository.DescontarStockSpAsync(inventario.Id, userSedeId, unidadesMinimas);
-
-                    var valorTexto = inventario.Lote.Producto.TipoAfectacionIgvDefault;
-
-                    if (!Enum.TryParse<TipoAfectacionIgvEnum>(valorTexto, ignoreCase: true, out var tipoAfectacion)
-                        || !Enum.IsDefined(typeof(TipoAfectacionIgvEnum), tipoAfectacion))
-                    {
-                        throw new InvalidOperationException($"El tipo de afectación IGV '{valorTexto}' no es válido.");
-                    }
-
-                    var detalle = _calculoTributarioService.ConstruirDetalle(
-                        ventaId: venta.Id,
-                        inventarioSedeId: inventario.Id,
-                        tipoUnidadVenta: item.TipoUnidadVenta,
-                        cantidadVenta: item.CantidadVenta,
-                        cantidadUnidadesMinimas: unidadesMinimas,
-                        precioUnitarioConIgv: precioUnitarioConIgv,
-                        tipoAfectacionIgv: tipoAfectacion
-                    );
-
-                    venta.Detalles.Add(detalle);
-                }               
+                venta.Detalles = await _crearDetalleVentaService.CrearDetalleVentaAsync(venta.Id, userSedeId, dto.Detalles);            
 
                 _calculoTributarioService.ConsolidarTotalesYValidarPagos(venta);
                 _comprobanteValidacionService.ValidarReglaMontoIdentificacion(venta.TipoComprobante, venta.MontoTotalVenta, venta.ClienteId);
@@ -140,8 +113,6 @@ namespace PharmacySystem.Application.Services
                 await _ventaRepository.CrearAsync(venta);
                 await _ventaRepository.GuardarCambiosAsync();
                 await transaction.CommitAsync();
-
-                await _ventaRepository.ObtenerPorIdAsync(venta.Id);
 
             } catch
             {

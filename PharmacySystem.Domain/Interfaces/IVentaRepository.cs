@@ -14,5 +14,7 @@ namespace PharmacySystem.Domain.Interfaces
         Task CrearAsync(Venta venta);
         Task GuardarCambiosAsync();
         Task<Venta?> ObtenerPorIdAsync(Guid id);
+        Task AnularVentaAsync(Guid ventaId, Guid sedeId, string motivoAnulacion);
+        Task<List<Venta>> ObtenerTodasLasVentasTurnoActivoAsync(Guid turnoCajaId, Guid sedeId); 
     }
 }

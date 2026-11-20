@@ -28,4 +28,11 @@ namespace PharmacySystem.Application.DTOs
         public MedioPagoEnum MedioPago { get; set; }
         public decimal? Monto { get; set; }
     }
+
+    public class AnularVentaDto
+    {
+        public string MotivoAnulacion { get; set; } = string.Empty;
+    }
+
+
 }

@@ -10,5 +10,6 @@ namespace PharmacySystem.Application.Interfaces
     public interface IVentaService
     {
         Task RealizarVentaAsync(Guid userId, VentasDto dto);
+        Task AnularVentaAsync(Guid ventaId, AnularVentaDto dto);
     }
 }

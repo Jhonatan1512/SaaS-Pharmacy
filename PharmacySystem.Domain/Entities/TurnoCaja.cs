@@ -52,15 +52,15 @@ namespace PharmacySystem.Domain.Entities
         }
 
         public void CerrarTurno(
-        decimal conteoEfectivo,
-        decimal conteoYape,
-        decimal conteoPlin,
-        decimal conteoTarjeta,
-        decimal sistemaEfectivo,
-        decimal sistemaYape,
-        decimal sistemaPlin,
-        decimal sistemaTarjeta,
-        string? observacionesCierre = null)
+            decimal conteoEfectivo,
+            decimal conteoYape,
+            decimal conteoPlin,
+            decimal conteoTarjeta,
+            decimal sistemaEfectivo,
+            decimal sistemaYape,
+            decimal sistemaPlin,
+            decimal sistemaTarjeta,
+            string? observacionesCierre = null)
         {
             if (!EstadoAbierto)
                 throw new InvalidOperationException("Este turno de caja ya se encuentra cerrado.");
@@ -95,11 +95,11 @@ namespace PharmacySystem.Domain.Entities
         }
 
         public void CorregirConteoCierre(
-    decimal? nuevoEfectivo,
-    decimal? nuevoYape,
-    decimal? nuevoPlin,
-    decimal? nuevoTarjeta,
-    string motivoCorreccion)
+            decimal? nuevoEfectivo,
+            decimal? nuevoYape,
+            decimal? nuevoPlin,
+            decimal? nuevoTarjeta,
+            string motivoCorreccion)
         {
             if (EstadoAbierto)
                 throw new InvalidOperationException("No se puede corregir el conteo de un turno que aún sigue abierto.");

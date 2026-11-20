@@ -15,6 +15,7 @@ using PharmacySystem.Infrastructure.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using PharmacySystem.Application.Mappings;
+using PharmacySystem.Application.Services.Ventas;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +52,8 @@ builder.Services.AddScoped<IComprobanteValidacionService, ComprobanteValidacionS
 builder.Services.AddScoped<IPresentacionInventarioService, PresentacionInventarioService>();
 builder.Services.AddScoped<ICalculoTributarioVentaService, CalculoTributarioVentaService>();
 builder.Services.AddScoped<IProcesadorPagosVentaService, ProcesadorPagosVentaService>();
+builder.Services.AddScoped<ICrearDetalleVentaService, CrearDetalleVentaService>();
+builder.Services.AddScoped<IDetallesVentasService, DetallesVentasService>();
 
 //Identity
 builder.Services.AddIdentity<Usuario, Role>(options =>
@@ -134,11 +137,16 @@ builder.Services.AddControllers(options =>
     });
 builder.Services.AddValidatorsFromAssemblyContaining<SedeValidatorDto>();
 
-//BD Conexion
+//BD Conexion producción
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConexion"),
         sqlOptions => sqlOptions.EnableRetryOnFailure()));
+
+//Desarrollo
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseSqlServer(
+//        builder.Configuration.GetConnectionString("DefaultConexion")));
 
 var app = builder.Build();
 
