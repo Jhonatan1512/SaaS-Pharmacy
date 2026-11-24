@@ -9,17 +9,24 @@ namespace PharmacySystem.Application.DTOs
 {
     public class DetalleVentasDto
     {
-
+        public Guid Id { get; set; }
+        public string NombreProducto { get; set; } = string.Empty;
+        public string TipoUnidadVenta { get; set; } = string.Empty;
+        public int CantidadVenta { get; set; }
+        public decimal PrecioUnitarioConIgv { get; set; }
+        public decimal SubTotalSinIgv { get; set; }
+        public decimal MontoIgv { get; set; }
+        public decimal TotalConIgv { get; set; }
     }
 
     public class VentaDelDiaDto
     {
         public Guid Id { get; set; }
         public TipoComprobanteEnum TipoComprobante { get; set; }
-        public string Comprobante { get; set; } = string.Empty; // Ej: "B001-00000012"
+        public string Comprobante { get; set; } = string.Empty;
         public DateTime FechaEmision { get; set; }
         public string Cliente { get; set; } = string.Empty;
-        public List<string> MetodosPago { get; set; } = new(); // Ej: ["Efectivo"] o ["Efectivo", "Yape"]
+        public List<string> MetodosPago { get; set; } = new();
         public decimal MontoIgv { get; set; }
         public decimal MontoTotalVenta { get; set; }
         public bool Anulado { get; set; }
@@ -37,5 +44,4 @@ namespace PharmacySystem.Application.DTOs
 
         public decimal TotalGeneralVentas => TotalEfectivo + TotalYape + TotalPlin + TotalTarjeta;
     }
-
 }

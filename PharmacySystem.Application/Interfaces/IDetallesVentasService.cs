@@ -1,4 +1,5 @@
 ﻿using PharmacySystem.Application.DTOs;
+using PharmacySystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace PharmacySystem.Application.Interfaces
     {
         Task<ResumenTotalVentasTurnoActivoDto> EjecutarAsync(Guid userId);
         Task<List<VentaDelDiaDto>> ObtenerVentasDelDiaAsync(Guid userId);
+        Task<List<DetalleVentasDto>> ObtenerDetalleAsync(Guid ventaId);
+        Task<List<VentaDelDiaDto>> HistorialVentasVentasAsync(DateTime fechaCierre, Guid usuarioId);
     }
 }

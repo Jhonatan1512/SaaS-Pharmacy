@@ -18,6 +18,7 @@ namespace PharmacySystem.Infrastructure.Repositories
         {
             _context = context;
         }
+
         public Task<Usuario?> ObtenerPorDniAsync(string dni)
         {
             return _context.Users.FirstOrDefaultAsync(u => u.NumeroDoc == dni && u.Documento == TipoDocumento.DNI);

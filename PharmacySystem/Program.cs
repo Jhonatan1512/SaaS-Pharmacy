@@ -152,12 +152,14 @@ var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline. Desarrollo
 //if (app.Environment.IsDevelopment())
 //{
 //    app.UseSwagger();
 //    app.UseSwaggerUI();
 //}
+
+// Configure the HTTP request pipeline. Producción
 app.UseSwagger();
 app.UseSwaggerUI();
 

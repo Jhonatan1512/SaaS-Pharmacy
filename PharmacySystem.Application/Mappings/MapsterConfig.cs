@@ -65,6 +65,9 @@ namespace PharmacySystem.Application.Mappings
                 .Map(dest => dest.Cliente, src => src.Cliente != null ? src.Cliente.NombresRazonSocial : "Público General")
                 .Map(dest => dest.MetodosPago, src => src.Pagos.Select(p => p.MedioPago.ToString()).ToList());
 
+            TypeAdapterConfig<DetalleVenta, DetalleVentasDto>.NewConfig()
+                .Map(dest => dest.NombreProducto, src => src.InventarioSede.Lote.Producto.NombreComercial);
+
         }
     }
 }

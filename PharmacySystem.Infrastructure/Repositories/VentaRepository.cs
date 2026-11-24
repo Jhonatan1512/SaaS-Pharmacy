@@ -74,13 +74,46 @@ namespace PharmacySystem.Infrastructure.Repositories
             }
         }
 
-        public async Task<List<Venta>> ObtenerTodasLasVentasTurnoActivoAsync(Guid turnoCajaId, Guid sedeId)
+        public async Task<List<Venta>> ObtenerTodasLasVentasTurnoActivoAsync(Guid turnoCajaId, Guid sedeId, Guid usuarioId)
         {
             return await _context.Ventas
                 .AsNoTracking()
                 .Include(v => v.Cliente)
                 .Include(v => v.Pagos)
-                .Where(v => v.TurnoCajaId == turnoCajaId && v.SedeId == sedeId)
+                .Where(v => v.TurnoCajaId == turnoCajaId && v.SedeId == sedeId && v.UsuarioId == usuarioId)
+                .OrderByDescending(v => v.FechaEmision)
+                .ToListAsync();
+        }
+
+        public async Task<List<DetalleVenta>> ObtenerDetalleVentaPorIdAsync(Guid ventaId, Guid sedeId)
+        {
+            return await _context.DetallesVenta
+                .AsNoTracking()
+                .Include(d => d.InventarioSede)
+                    .ThenInclude(i => i.Lote)
+                        .ThenInclude(l => l.Producto)
+                .Where(d => d.VentaId == ventaId && d.Venta.SedeId == sedeId)
+                .ToListAsync();
+        }
+
+        public async Task<List<Venta>> ObtenerPorTurnosCerradosPorFechaCierreAsync(Guid sedeId, Guid usuarioId, DateTime fechaInicioUtc, DateTime fechaFinUtc)
+        {
+            var turnosCerradosIds = _context.TurnosCaja
+                .Where(t => t.SedeId == sedeId
+                         && !t.EstadoAbierto
+                         && t.FechaCierre != null
+                         && t.FechaCierre >= fechaInicioUtc
+                         && t.FechaCierre < fechaFinUtc)
+                .Select(t => t.Id);
+
+            return await _context.Ventas
+                .AsNoTracking()
+                .Include(v => v.Cliente)
+                .Include(v => v.Pagos)
+                .Where(v => v.SedeId == sedeId
+                         && v.UsuarioId == usuarioId
+                         && v.TurnoCajaId != null
+                         && turnosCerradosIds.Contains(v.TurnoCajaId.Value))
                 .OrderByDescending(v => v.FechaEmision)
                 .ToListAsync();
         }

@@ -9,6 +9,6 @@ namespace PharmacySystem.Application.Interfaces
 {
     public interface ICredencialesFermaceutico
     {
-        Task ValidarRegistrosDuplicados(string email, string dni, string ruc);
+        Task ValidarRegistrosDuplicados(string? email, string? dni, string? ruc, Guid? usuarioIdExcluir = null);
     }
 }

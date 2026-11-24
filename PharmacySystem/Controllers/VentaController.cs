@@ -53,6 +53,22 @@ namespace PharmacySystem.Api.Controllers
             return Ok(response);
         }
 
+        [Authorize(Roles = "Farmaceutico")]
+        [HttpGet("{ventaId:guid}/detalles")]
+        public async Task<ActionResult<List<DetalleVentasDto>>> ObtenerDetallesPorVenta(Guid ventaId)
+        {
+            var detalles = await _detallesVentasService.ObtenerDetalleAsync(ventaId);
+            return Ok(detalles);
+        }
+
+        [Authorize(Roles = "Farmaceutico")]
+        [HttpGet("historial-turnos-cerrados")]
+        public async Task<IActionResult> ObteneHistorialVentas([FromQuery] DateTime fechaCierre)
+        {
+            var ventas = await _detallesVentasService.HistorialVentasVentasAsync(fechaCierre, UserId);
+            return Ok(ventas);
+        }
+
         private Guid UserId => _currentUserService.GetUserId();
     }
 }

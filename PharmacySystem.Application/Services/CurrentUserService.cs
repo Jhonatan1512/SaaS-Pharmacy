@@ -33,7 +33,7 @@ namespace PharmacySystem.Application.Services
 
             if (parseGuid == Guid.Empty)
             {
-                throw new UnauthorizedAccessException("El usuario con sesión activa no pertenece a ninguna oficina.");
+                throw new UnauthorizedAccessException("El usuario con sesión activa no pertenece a ninguna sede.");
             }
 
             return parseGuid;

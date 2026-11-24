@@ -40,19 +40,59 @@ namespace PharmacySystem.Application.Services
             return detalle;
         }
 
-        public async Task<List<VentaDelDiaDto>> ObtenerVentasDelDiaAsync(Guid userId)
+        public async Task<List<VentaDelDiaDto>> HistorialVentasVentasAsync(DateTime fechaCierre, Guid usuarioId)
         {
             Guid userSedeId = _currentUserService.GetSedeId();
             if (userSedeId == Guid.Empty)
-                throw new UnauthorizedAccessException("El farmacéutico no tiene una sede asignada.");
+                throw new UnauthorizedAccessException("El usuario no tiene una sede asignada.");
 
-            var turnoActivo = await _turnoCajaRepository.ObtenerTurnoAbiertoPorUsuarioAsync(userId);
-            if (turnoActivo == null || turnoActivo.SedeId != userSedeId)
-                return new List<VentaDelDiaDto>();
+            var (inicioUtc, finUtc) = ObtenerRangoUtcPeru(fechaCierre);
 
-            var ventas = await _ventaRepository.ObtenerTodasLasVentasTurnoActivoAsync(turnoActivo.Id, userSedeId);
+            var ventas = await _ventaRepository.ObtenerPorTurnosCerradosPorFechaCierreAsync(userSedeId, usuarioId, inicioUtc, finUtc);
 
             return ventas.Adapt<List<VentaDelDiaDto>>();
+        }
+
+        public async Task<List<DetalleVentasDto>> ObtenerDetalleAsync(Guid ventaId)
+        {
+            Guid userSedeId = _currentUserService.GetSedeId();
+            if (userSedeId == Guid.Empty)
+                throw new UnauthorizedAccessException("El usuario no tiene una sede asignada.");
+
+            var detalles = await _ventaRepository.ObtenerDetalleVentaPorIdAsync(ventaId, userSedeId);
+
+            if (detalles.Count == 0)
+                throw new KeyNotFoundException("No se encontraron detalles para la venta especificada en su sede.");
+
+            return detalles.Adapt<List<DetalleVentasDto>>();
+        }
+
+        public async Task<List<VentaDelDiaDto>> ObtenerVentasDelDiaAsync(Guid userId)
+        {
+            Guid sedeId = _currentUserService.GetSedeId();
+            if (sedeId == Guid.Empty)
+                throw new UnauthorizedAccessException("El farmacéutico no tiene una sede asignada.");
+
+
+            var turnoActivo = await _turnoCajaRepository.ObtenerTurnoAbiertoPorUsuarioAsync(userId);
+            if (turnoActivo == null || turnoActivo.SedeId != sedeId)
+                return new List<VentaDelDiaDto>();
+
+            var ventas = await _ventaRepository.ObtenerTodasLasVentasTurnoActivoAsync(turnoActivo.Id, sedeId, userId);
+
+            return ventas.Adapt<List<VentaDelDiaDto>>();
+        }
+
+        private static (DateTime InicioUtc, DateTime FinUtc) ObtenerRangoUtcPeru(DateTime fechaLocal)
+        {
+            var zonaPeru = TimeZoneInfo.FindSystemTimeZoneById("America/Lima");
+            var inicioLocal = DateTime.SpecifyKind(fechaLocal.Date, DateTimeKind.Unspecified);
+            var finLocal = inicioLocal.AddDays(1);
+
+            return (
+                TimeZoneInfo.ConvertTimeToUtc(inicioLocal, zonaPeru),
+                TimeZoneInfo.ConvertTimeToUtc(finLocal, zonaPeru)
+            );
         }
     }
 }

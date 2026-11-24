@@ -19,26 +19,34 @@ namespace PharmacySystem.Application.Services
             _userManager = userManager;
             _userRepository = userRepository;
         }
-        public async Task ValidarRegistrosDuplicados(string email, string dni, string ruc)
+        public async Task ValidarRegistrosDuplicados(string? email, string? dni, string? ruc, Guid? usuarioIdExcluir = null)
         {
-            var dniExiste = await _userRepository.ObtenerPorDniAsync(dni);
-            if (dniExiste != null)
+            if (!string.IsNullOrWhiteSpace(dni))
             {
-                throw new InvalidOperationException("El DNI ya esta registrado");
+                var dniExiste = await _userRepository.ObtenerPorDniAsync(dni.Trim());
+                if (dniExiste != null && dniExiste.Id != usuarioIdExcluir)
+                {
+                    throw new InvalidOperationException("El DNI ya está registrado.");
+                }
             }
 
-            var rucExiste = await _userRepository.ObtenerPorRucAsync(ruc);
-            if (rucExiste != null)
+            if (!string.IsNullOrWhiteSpace(ruc))
             {
-                throw new InvalidOperationException("El RUC ya esta registrado");
+                var rucExiste = await _userRepository.ObtenerPorRucAsync(ruc.Trim());
+                if (rucExiste != null && rucExiste.Id != usuarioIdExcluir)
+                {
+                    throw new InvalidOperationException("El RUC ya está registrado.");
+                }
             }
 
-            var emailExiste = await _userManager.FindByEmailAsync(email);
-            if (emailExiste != null)
+            if (!string.IsNullOrWhiteSpace(email))
             {
-                throw new InvalidOperationException("El Email ya esta registrado");
+                var emailExiste = await _userManager.FindByEmailAsync(email.Trim());
+                if (emailExiste != null && emailExiste.Id != usuarioIdExcluir)
+                {
+                    throw new InvalidOperationException("El Email ya está registrado.");
+                }
             }
-
         }
     }
 }

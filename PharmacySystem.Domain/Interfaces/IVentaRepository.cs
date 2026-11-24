@@ -15,6 +15,8 @@ namespace PharmacySystem.Domain.Interfaces
         Task GuardarCambiosAsync();
         Task<Venta?> ObtenerPorIdAsync(Guid id);
         Task AnularVentaAsync(Guid ventaId, Guid sedeId, string motivoAnulacion);
-        Task<List<Venta>> ObtenerTodasLasVentasTurnoActivoAsync(Guid turnoCajaId, Guid sedeId); 
+        Task<List<Venta>> ObtenerTodasLasVentasTurnoActivoAsync(Guid turnoCajaId, Guid sedeId, Guid usuarioId);
+        Task<List<DetalleVenta>> ObtenerDetalleVentaPorIdAsync(Guid ventaId, Guid sedeId);
+        Task<List<Venta>> ObtenerPorTurnosCerradosPorFechaCierreAsync(Guid sedeId, Guid usuarioId, DateTime fechaInicioUtc, DateTime fechaFinUtc);
     }
 }
