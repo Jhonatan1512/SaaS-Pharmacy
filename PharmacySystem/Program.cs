@@ -145,30 +145,30 @@ builder.Services.AddControllers(options =>
 builder.Services.AddValidatorsFromAssemblyContaining<SedeValidatorDto>();
 
 //BD Conexion producción
-//builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//    options.UseSqlServer(
-//        builder.Configuration.GetConnectionString("DefaultConexion"),
-//        sqlOptions => sqlOptions.EnableRetryOnFailure()));
-
-//Desarrollo
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConexion")));
+        builder.Configuration.GetConnectionString("DefaultConexion"),
+        sqlOptions => sqlOptions.EnableRetryOnFailure()));
+
+//Desarrollo
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseSqlServer(
+//        builder.Configuration.GetConnectionString("DefaultConexion")));
 
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline. Desarrollo
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
 
 // Configure the HTTP request pipeline. Producción
-//app.UseSwagger();
-//app.UseSwaggerUI();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
