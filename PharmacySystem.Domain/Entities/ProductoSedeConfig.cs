@@ -13,6 +13,7 @@ namespace PharmacySystem.Domain.Entities
         public Guid ProductoId { get; set; }
         public int StockMinimoUnidades { get; set; }
         public int StockDeseadoUnidades { get; set; }
+        public int DiasAnticipacionVencimiento { get; set; } = 30;
 
         public Sede Sede { get; set; } = null!;
         public Producto Producto { get; set; } = null!;

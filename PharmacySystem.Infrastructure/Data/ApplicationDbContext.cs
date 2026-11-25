@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PharmacySystem.Domain.Entities;
+using System.Reflection.Emit;
 
 namespace PharmacySystem.Infrastructure.Data
 {
@@ -116,6 +117,11 @@ namespace PharmacySystem.Infrastructure.Data
                 entity.HasIndex(x => new { x.SedeId, x.LoteId })
                 .HasDatabaseName("IX_InventarioSedes_SedeId_LoteId");
             });
+
+            // Índice compuesto único: para no repetir la configuración 2 veces en la misma sede y producto
+            builder.Entity<ProductoSedeConfig>()
+                .HasIndex(c => new { c.SedeId, c.ProductoId })
+                .IsUnique();
 
             SeedIdentityData(builder);
         }

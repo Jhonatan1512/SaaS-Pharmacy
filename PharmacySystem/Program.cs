@@ -54,6 +54,13 @@ builder.Services.AddScoped<ICalculoTributarioVentaService, CalculoTributarioVent
 builder.Services.AddScoped<IProcesadorPagosVentaService, ProcesadorPagosVentaService>();
 builder.Services.AddScoped<ICrearDetalleVentaService, CrearDetalleVentaService>();
 builder.Services.AddScoped<IDetallesVentasService, DetallesVentasService>();
+builder.Services.AddScoped<ISolicitudReposicionRepository, SolicitudReposicionRepository>();
+builder.Services.AddScoped<ISolicitudReposicionService, SolicituReposicionService>();
+builder.Services.AddScoped<IPlantillaSolicitudService, PlantillaSolicitudService>();
+builder.Services.AddScoped<IAlertaReposicionService,  AlertaReposicionService>();
+builder.Services.AddScoped<IProductoSedeConfigRepository, ProductoSedeConfigRepository>();
+builder.Services.AddScoped<IProductoSedeConfigService, ProductoSedeConfigService>();
+builder.Services.AddScoped<ISolicitudReposicionAdminService, SolicitudReposicionAdminService>();
 
 //Identity
 builder.Services.AddIdentity<Usuario, Role>(options =>
@@ -138,30 +145,30 @@ builder.Services.AddControllers(options =>
 builder.Services.AddValidatorsFromAssemblyContaining<SedeValidatorDto>();
 
 //BD Conexion producción
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConexion"),
-        sqlOptions => sqlOptions.EnableRetryOnFailure()));
-
-//Desarrollo
 //builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //    options.UseSqlServer(
-//        builder.Configuration.GetConnectionString("DefaultConexion")));
+//        builder.Configuration.GetConnectionString("DefaultConexion"),
+//        sqlOptions => sqlOptions.EnableRetryOnFailure()));
+
+//Desarrollo
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConexion")));
 
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline. Desarrollo
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//}
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 // Configure the HTTP request pipeline. Producción
-app.UseSwagger();
-app.UseSwaggerUI();
+//app.UseSwagger();
+//app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

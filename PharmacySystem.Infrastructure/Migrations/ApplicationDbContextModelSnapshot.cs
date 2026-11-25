@@ -427,6 +427,9 @@ namespace PharmacySystem.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("DiasAnticipacionVencimiento")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("ProductoId")
                         .HasColumnType("uniqueidentifier");
 
@@ -443,7 +446,8 @@ namespace PharmacySystem.Infrastructure.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.HasIndex("SedeId");
+                    b.HasIndex("SedeId", "ProductoId")
+                        .IsUnique();
 
                     b.ToTable("ProductosSedeConfig");
                 });
@@ -582,13 +586,26 @@ namespace PharmacySystem.Infrastructure.Migrations
                     b.Property<int>("Estado")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("FechaLimiteRequerida")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaRespuesta")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("FechaSolicitud")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Observacion")
+                    b.Property<string>("MotivoSolicitud")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RespuestaAdministrador")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("SedeSolicitanteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UsuarioAprobadorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UsuarioSolicitanteId")
@@ -597,6 +614,8 @@ namespace PharmacySystem.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("SedeSolicitanteId");
+
+                    b.HasIndex("UsuarioAprobadorId");
 
                     b.HasIndex("UsuarioSolicitanteId");
 
@@ -812,7 +831,7 @@ namespace PharmacySystem.Infrastructure.Migrations
                             NormalizedEmail = "GERENCIA@FARMACIA.COM",
                             NormalizedUserName = "GERENCIA@FARMACIA.COM",
                             NumeroDoc = "20552103816",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKm2nLZ9rFHCx2Y4Z5Y27YOviiQtHjRqtKOZB6zsiNOxTdFmcEN7K1q9jXsM9VwPCw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPE6hnhWsOYqvNiehrBgsO4Fs51QOUEMV2q9xSb+PSVCcfu5zNIbcCRg09gQy8B5+Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "d3b07384-d113-40e4-a720-78fbf2fb1873",
                             TwoFactorEnabled = false,
@@ -1088,6 +1107,10 @@ namespace PharmacySystem.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("PharmacySystem.Domain.Entities.Usuario", "UsuarioAprobador")
+                        .WithMany()
+                        .HasForeignKey("UsuarioAprobadorId");
+
                     b.HasOne("PharmacySystem.Domain.Entities.Usuario", "UsuarioSolicitante")
                         .WithMany()
                         .HasForeignKey("UsuarioSolicitanteId")
@@ -1095,6 +1118,8 @@ namespace PharmacySystem.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("SedeSolicitante");
+
+                    b.Navigation("UsuarioAprobador");
 
                     b.Navigation("UsuarioSolicitante");
                 });

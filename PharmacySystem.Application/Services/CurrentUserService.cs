@@ -55,5 +55,10 @@ namespace PharmacySystem.Application.Services
 
             return parsedGuid;
         }
+
+        public bool EsAdministrador()
+        {
+            return _contextAccessor.HttpContext?.User.IsInRole("Administrador") ?? false;
+        }
     }
 }

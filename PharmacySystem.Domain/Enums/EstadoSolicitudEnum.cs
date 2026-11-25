@@ -10,7 +10,6 @@ namespace PharmacySystem.Domain.Enums
     {
         Pendiente = 1,
         Aprobado = 2,
-        Rehazado = 3,
-        Completado = 4,
+        Rechazado = 3,
     }
 }

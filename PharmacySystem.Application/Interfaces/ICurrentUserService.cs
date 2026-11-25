@@ -10,5 +10,6 @@ namespace PharmacySystem.Application.Interfaces
     {
         Guid GetUserId();
         Guid GetSedeId();
+        bool EsAdministrador();
     }
 }
