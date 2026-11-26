@@ -3,11 +3,6 @@ using PharmacySystem.Application.Interfaces;
 using PharmacySystem.Domain.Entities;
 using PharmacySystem.Domain.Enums;
 using PharmacySystem.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PharmacySystem.Application.Services
 {
@@ -72,9 +67,41 @@ namespace PharmacySystem.Application.Services
             }
         }
 
-        public async Task<List<SolicitudReposicionDocumentoDto>> ListarTodasAsync(
-        Guid? sedeId = null,
-        EstadoSolicitudEnum? estado = null)
+        public async Task ModificarRespuestaSolicitudAsync(Guid solicitudId, Guid adminId, ResponderSolicitudReposicionDto dto)
+        {
+            var solicitud = await _repository.ObtenerPorIdParaActualizarAsync(solicitudId)
+                ?? throw new KeyNotFoundException("La solicitud de reposición no existe.");
+
+            if (solicitud.Estado == EstadoSolicitudEnum.Pendiente)
+                throw new InvalidOperationException("La solicitud aún está pendiente; utilice el endpoint de responder.");
+
+            if (solicitud.Estado == EstadoSolicitudEnum.Despachado)
+                throw new InvalidOperationException("No se puede modificar una solicitud que ya fue despachada.");
+
+            solicitud.UsuarioAprobadorId = adminId;
+            solicitud.FechaRespuesta = DateTime.UtcNow;
+            solicitud.RespuestaAdministrador = dto.RespuestaAdministrador.Trim();
+
+            if (dto.Aprobada)
+                ProcesarAprobacion(solicitud, dto.ProductosAprobados);
+            else
+                ProcesarRechazo(solicitud);
+
+            await _repository.GuardarCambiosAsync();
+        }
+
+        public async Task FinalizarSolictudAsync(Guid solicitudId)
+        {
+            var solicitud = await _repository.ObtenerPorIdParaActualizarAsync(solicitudId)
+                ?? throw new KeyNotFoundException("La solicitud de reposición no existe.");
+
+            if (solicitud.Estado != EstadoSolicitudEnum.Aprobado) throw new InvalidOperationException("No se puede finalizar solicitudes que no esten aprobadas");
+
+            solicitud.Estado = EstadoSolicitudEnum.Despachado;
+            await _repository.GuardarCambiosAsync();
+        }
+
+        public async Task<List<SolicitudReposicionDocumentoDto>> ListarTodasAsync(Guid? sedeId = null, EstadoSolicitudEnum? estado = null)
         {
             var solicitudes = await _repository.ObtenerTodasConDetalleAsync(sedeId, estado);
             return solicitudes.Select(MapearADocumentoDto).ToList();
@@ -93,6 +120,7 @@ namespace PharmacySystem.Application.Services
             return new SolicitudReposicionDocumentoDto
             {
                 Id = solicitud.Id,
+                SedeId = solicitud.SedeSolicitante.Id,
                 SedeSolicitante = solicitud.SedeSolicitante.Nombre,
                 UsuarioSolicitante = solicitud.UsuarioSolicitante.NombreCompletoRazonSocial,
                 FechaSolicitud = solicitud.FechaSolicitud,

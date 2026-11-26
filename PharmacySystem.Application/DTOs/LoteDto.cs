@@ -6,14 +6,6 @@ using System.Threading.Tasks;
 
 namespace PharmacySystem.Application.DTOs
 {
-    public class LoteDto
-    {
-        public Guid ProductoId { get; set; }
-        public string CodigoLote { get; set; } = string.Empty;
-        public DateTime FechaVencimiento { get; set; }
-        public decimal PrecioCostoUnitario { get; set; }
-    }
-
     public class GetLoteDto
     {
         public Guid Id { get; set; }

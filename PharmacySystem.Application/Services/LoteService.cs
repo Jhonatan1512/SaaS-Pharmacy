@@ -27,7 +27,7 @@ namespace PharmacySystem.Application.Services
             if (loteExiste == null)
                 throw new KeyNotFoundException("Registro de lote no encontrado.");
 
-            // 2. Determinar los valores objetivo para evaluar duplicidad
+            // Determinar los valores objetivo para evaluar duplicidad
             var productoIdObjetivo = dto.ProductoId ?? loteExiste.ProductoId;
 
             if (dto.CodigoLote != null)
@@ -36,40 +36,17 @@ namespace PharmacySystem.Application.Services
             }
             var codigoLoteObjetivo = dto.CodigoLote ?? loteExiste.CodigoLote;
 
-            // 3. Validar duplicidad excluyendo el propio ID que se está actualizando
+            // Validar duplicidad excluyendo el propio ID que se está actualizando
             if (await _loteRepository.ExisteCodigoLoteEnOtroRegistroAsync(productoIdObjetivo, codigoLoteObjetivo, id))
             {
                 throw new InvalidOperationException($"El producto ya cuenta con otro lote registrado bajo el código '{codigoLoteObjetivo}'.");
             }
 
-            // 4. Copiar únicamente los valores enviadas en el DTO a la entidad
+            // Copiar únicamente los valores enviadas en el DTO a la entidad
             dto.Adapt(loteExiste);
 
-            // 5. Persistir cambios en la base de datos via ChangeTracker
+            // Persistir cambios en la base de datos via ChangeTracker
             await _loteRepository.ActualizarloteAsync(loteExiste);
-        }
-
-        public async Task CrearLoteAsync(LoteDto dto)
-        {
-            var productoExiste = await _productoRepository.ObtenerPorIdAsync(dto.ProductoId);
-            if (productoExiste == null) 
-            {
-                throw new KeyNotFoundException("El producto no existe");
-            }
-
-            var codigoLoteLimpio = dto.CodigoLote.Trim().ToUpper();
-
-            if(await _loteRepository.ExisteLoteEnProductoAsync(dto.ProductoId, dto.CodigoLote))
-            {
-                throw new InvalidOperationException("El producto ya tiene un lote registrado");
-            }
-
-            var nuevoLote = dto.Adapt<Lote>();
-            nuevoLote.Id = Guid.NewGuid(); 
-            nuevoLote.CodigoLote = codigoLoteLimpio;
-            nuevoLote.FechaCreacion = DateTime.UtcNow;
-
-            await _loteRepository.CrearLoteAsync(nuevoLote);
         }
 
         public async Task<IEnumerable<GetLoteDto>> GetLoteAsync()

@@ -14,9 +14,7 @@ namespace PharmacySystem.Application.DTOs
         public int StockFisicoUnidades { get; set; }
         public decimal? PrecioVentaUnidad { get; set; }
         public decimal? PrecioVentaBlister { get; set; }
-        public decimal? PrecioVentaCaja { get; set; }
-        public EstadoLoteSedeEnum Estado { get; set; } = EstadoLoteSedeEnum.EnTransito;
-        
+        public decimal? PrecioVentaCaja { get; set; }        
     }
 
     public class InvetarioSedeResponseDto
@@ -52,8 +50,8 @@ namespace PharmacySystem.Application.DTOs
     }
 
     public class CorregirRecepcionDto
-    {
-        public int NuevaCantidadDanada { get; set; }
+    { 
+        public int NuevaCantidadDaniada { get; set; }
         public string MotivoCorreccion { get; set; } = string.Empty;
     }
 }

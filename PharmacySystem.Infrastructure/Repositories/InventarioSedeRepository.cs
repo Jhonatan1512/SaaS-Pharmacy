@@ -1,39 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using PharmacySystem.Domain.Entities;
 using PharmacySystem.Domain.Enums;
 using PharmacySystem.Domain.Interfaces;
 using PharmacySystem.Infrastructure.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PharmacySystem.Infrastructure.Repositories
 {
     public class InventarioSedeRepository : IInventarioSedeRepository
     {
         private readonly ApplicationDbContext _context;
+
         public InventarioSedeRepository(ApplicationDbContext context)
         {
             _context = context;
-        }
-
-        public async Task ActualizarAsync()
-        {
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task CrearInventarioSedeAsync(InventarioSede sede)
-        {
-            _context.InventarioSedes.Add(sede);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task EliminarRegistroAsync(InventarioSede inventario)
-        {
-            _context.InventarioSedes.Remove(inventario);
-            await Task.CompletedTask;
         }
 
         public async Task<bool> ExisteInventarioEnSedeAsync(Guid sedeId, Guid loteId)
@@ -45,43 +25,18 @@ namespace PharmacySystem.Infrastructure.Repositories
         public async Task<InventarioSede?> ObtenerPorIdAsync(Guid id)
         {
             return await _context.InventarioSedes
+                .AsNoTracking()
                 .FirstOrDefaultAsync(i => i.Id == id);
-        } 
-
-        public async Task<InventarioSede?> ObtenerCapaActivaPorSedeLoteYPrecioAsync(Guid sedeId, Guid loteId, decimal? precioVenta)
-        {
-            return await _context.InventarioSedes
-                .FirstOrDefaultAsync(i =>
-                    i.SedeId == sedeId &&
-                    i.LoteId == loteId &&
-                    i.PrecioVentaUnidad == precioVenta &&
-                    i.Estado == EstadoLoteSedeEnum.Activo);
-        }
-
-        public async Task<InventarioSede?> ObtenerPorSedeYLoteActualizarAsync(Guid sedeId, Guid loteId)
-        {
-            return await _context.InventarioSedes
-                .FirstOrDefaultAsync(i => i.SedeId == sedeId && i.LoteId == loteId);
-        }
-
-        public async Task<InventarioSede?> ObtenerPorSedeLotePrecioYEstadoAsync( Guid sedeId, Guid loteId, decimal precioVentaUnidad, EstadoLoteSedeEnum estado)
-        {
-            return await _context.InventarioSedes
-                .FirstOrDefaultAsync(i =>
-                    i.SedeId == sedeId &&
-                    i.LoteId == loteId &&
-                    i.PrecioVentaUnidad == precioVentaUnidad &&
-                    i.Estado == estado);
         }
 
         public async Task<IEnumerable<InventarioSede>> ObtenerPorSedeIdAsync(Guid sedeId)
         {
             return await _context.InventarioSedes
                 .AsNoTracking()
-                .Include(i => i.Sede)                  
-                .Include(i => i.UsuarioRecibe)          
+                .Include(i => i.Sede)
+                .Include(i => i.UsuarioRecibe)
                 .Include(i => i.Lote)
-                    .ThenInclude(l => l.Producto)      
+                    .ThenInclude(l => l.Producto)
                 .Where(i => i.SedeId == sedeId)
                 .OrderBy(i => i.Estado)
                 .ThenBy(i => i.Lote.FechaVencimiento)
@@ -98,6 +53,146 @@ namespace PharmacySystem.Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task DespacharLoteASedeSpAsync(
+            Guid sedeId,
+            Guid loteId,
+            int cantidadUnidades,
+            decimal? precioVentaUnidad,
+            decimal? precioVentaBlister,
+            decimal? precioVentaCaja,
+            Guid usuarioId)
+        {
+            try
+            {
+                int estadoEnTransito = (int)EstadoLoteSedeEnum.EnTransito;
+                int tipoMovimientoSalida = (int)TipoMovimientoKardexEnum.SalidaLote;
+                DateTime fechaActual = DateTime.UtcNow;
+
+                await _context.Database.ExecuteSqlInterpolatedAsync($@"
+                    EXEC sp_DespacharLoteASede 
+                        @SedeId = {sedeId},
+                        @LoteId = {loteId},
+                        @CantidadUnidades = {cantidadUnidades},
+                        @PrecioVentaUnidad = {precioVentaUnidad},
+                        @PrecioVentaBlister = {precioVentaBlister},
+                        @PrecioVentaCaja = {precioVentaCaja},
+                        @UsuarioId = {usuarioId},
+                        @EstadoEnTransito = {estadoEnTransito},
+                        @TipoMovimientoSalida = {tipoMovimientoSalida},
+                        @FechaActual = {fechaActual}");
+            }
+            catch (SqlException ex) when (ex.Number is >= 51001 and <= 51007)
+            {
+                if (ex.Number is 51002 or 51003)
+                    throw new KeyNotFoundException(ex.Message);
+
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        public async Task ConfirmarRecepcionSpAsync(
+            Guid inventarioSedeId,
+            Guid sedeUsuarioId,
+            Guid usuarioRecibeId,
+            int cantidadDaniada,
+            string? observacion)
+        {
+            try
+            {
+                int estadoEnTransito = (int)EstadoLoteSedeEnum.EnTransito;
+                int estadoActivo = (int)EstadoLoteSedeEnum.Activo;
+                int estadoAgotado = (int)EstadoLoteSedeEnum.Agotado;
+                int tipoMovimientoIngreso = (int)TipoMovimientoKardexEnum.IngresoLote;
+                DateTime fechaRecepcion = DateTime.UtcNow;
+
+                await _context.Database.ExecuteSqlInterpolatedAsync($@"
+                    EXEC sp_ConfirmarRecepcionSede 
+                        @InventarioSedeId = {inventarioSedeId},
+                        @SedeUsuarioId = {sedeUsuarioId},
+                        @UsuarioRecibeId = {usuarioRecibeId},
+                        @CantidadDaniada = {cantidadDaniada},
+                        @Observacion = {observacion},
+                        @EstadoEnTransito = {estadoEnTransito},
+                        @EstadoActivo = {estadoActivo},
+                        @EstadoAgotado = {estadoAgotado},
+                        @TipoMovimientoIngreso = {tipoMovimientoIngreso},
+                        @FechaRecepcion = {fechaRecepcion}");
+            }
+            catch (SqlException ex) when (ex.Number is >= 51010 and <= 51014)
+            {
+                if (ex.Number == 51011) throw new KeyNotFoundException(ex.Message);
+                if (ex.Number == 51012) throw new UnauthorizedAccessException(ex.Message);
+
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        public async Task ActualizarPrecioSpAsync(
+            Guid inventarioSedeId,
+            decimal? precioVentaUnidad,
+            decimal? precioVentaBlister,
+            decimal? precioVentaCaja)
+        {
+            try
+            {
+                int estadoEnTransito = (int)EstadoLoteSedeEnum.EnTransito;
+                int estadoAgotado = (int)EstadoLoteSedeEnum.Agotado;
+                int estadoActivo = (int)EstadoLoteSedeEnum.Activo;
+
+                await _context.Database.ExecuteSqlInterpolatedAsync($@"
+                    EXEC sp_ActualizarPrecioInventarioSede 
+                        @InventarioSedeId = {inventarioSedeId},
+                        @PrecioVentaUnidad = {precioVentaUnidad},
+                        @PrecioVentaBlister = {precioVentaBlister},
+                        @PrecioVentaCaja = {precioVentaCaja},
+                        @EstadoEnTransito = {estadoEnTransito},
+                        @EstadoAgotado = {estadoAgotado},
+                        @EstadoActivo = {estadoActivo}");
+            }
+            catch (SqlException ex) when (ex.Number is >= 51020 and <= 51023)
+            {
+                if (ex.Number == 51020)
+                    throw new KeyNotFoundException(ex.Message);
+
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
+        public async Task CorregirMermaRecepcionSpAsync(
+            Guid inventarioSedeId,
+            Guid sedeUsuarioId,
+            Guid usuarioId,
+            int nuevaCantidadDanada,
+            string? motivoCorreccion)
+        {
+            try
+            {
+                int estadoActivo = (int)EstadoLoteSedeEnum.Activo;
+                int estadoAgotado = (int)EstadoLoteSedeEnum.Agotado;
+                int tipoMovimientoAjuste = (int)TipoMovimientoKardexEnum.Ajuste;
+                DateTime fechaActual = DateTime.UtcNow;
+
+                await _context.Database.ExecuteSqlInterpolatedAsync($@"
+                    EXEC sp_CorregirMermaRecepcionSede 
+                        @InventarioSedeId = {inventarioSedeId},
+                        @SedeUsuarioId = {sedeUsuarioId},
+                        @UsuarioId = {usuarioId},
+                        @NuevaCantidadDanada = {nuevaCantidadDanada},
+                        @MotivoCorreccion = {motivoCorreccion},
+                        @EstadoActivo = {estadoActivo},
+                        @EstadoAgotado = {estadoAgotado},
+                        @TipoMovimientoAjuste = {tipoMovimientoAjuste},
+                        @FechaActual = {fechaActual}");
+            }
+            catch (SqlException ex) when (ex.Number is >= 51030 and <= 51035)
+            {
+                if (ex.Number == 51031) throw new KeyNotFoundException(ex.Message);
+                if (ex.Number == 51032) throw new UnauthorizedAccessException(ex.Message);
+
+                throw new InvalidOperationException(ex.Message);
+            }
+        }
+
         public async Task DescontarStockSpAsync(Guid inventarioSedeId, Guid sedeId, int cantidadUnidadesMinimas)
         {
             try
@@ -109,7 +204,7 @@ namespace PharmacySystem.Infrastructure.Repositories
                 await _context.Database.ExecuteSqlInterpolatedAsync(
                     $"EXEC sp_DescontarStockVenta @InventarioSedeId={inventarioSedeId}, @SedeId={sedeId}, @CantidadUnidadesMinimas={cantidadUnidadesMinimas}, @EstadoActivo={estadoActivo}, @EstadoAgotado={estadoAgotado}, @FechaActual={fechaActual}");
             }
-            catch (Microsoft.Data.SqlClient.SqlException ex) when (ex.Number >= 50001 && ex.Number <= 50010)
+            catch (SqlException ex) when (ex.Number >= 50001 && ex.Number <= 50010)
             {
                 throw new InvalidOperationException(ex.Message);
             }

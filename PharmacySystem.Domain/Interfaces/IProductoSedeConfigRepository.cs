@@ -11,6 +11,7 @@ namespace PharmacySystem.Domain.Interfaces
     {
         Task<List<ProductoSedeConfig>> ObtenerConInventarioPorSedeAsync(Guid sedeId);
         Task<ProductoSedeConfig?> ObtenerPorSedeYProductoAsync(Guid sedeId, Guid productoId);
+        Task<List<ProductoSedeConfig>> ObtenerConfiguracionProductosAsync();
         Task AgregarAsync(ProductoSedeConfig config);
         Task GuardarCambiosAsync();
     }

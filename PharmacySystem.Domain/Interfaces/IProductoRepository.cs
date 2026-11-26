@@ -9,7 +9,7 @@ namespace PharmacySystem.Domain.Interfaces
 {
     public interface IProductoRepository
     {
-        Task<Producto> CrearProductoAsync(Producto producto);
+        Task CrearProductoAsync(Producto producto);
         Task<IEnumerable<Producto>> GetAllProductsAsync();
         Task<Producto?> ObtenerPorIdAsync(Guid Id);
         Task<Producto?> ObtenerPorCodigoBarrasAsync(string codigoBarras);

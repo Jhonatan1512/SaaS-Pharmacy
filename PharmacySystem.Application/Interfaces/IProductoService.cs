@@ -9,7 +9,6 @@ namespace PharmacySystem.Application.Interfaces
 {
     public interface IProductoService
     {
-        Task CrearProductoAsync(ProductoDto dto);
         Task<IEnumerable<GetProductosDto>> ObtenerProductosAsync();
         Task ActualizarProductoAsync(Guid id, ActualizarProductoDto dto);
         Task ActualizarEstadoProductoAsync(Guid id);

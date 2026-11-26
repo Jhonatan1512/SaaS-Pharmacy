@@ -68,6 +68,35 @@ namespace PharmacySystem.Application.Mappings
             TypeAdapterConfig<DetalleVenta, DetalleVentasDto>.NewConfig()
                 .Map(dest => dest.NombreProducto, src => src.InventarioSede.Lote.Producto.NombreComercial);
 
+            TypeAdapterConfig<ProductoSedeConfig, ProductoSedeConfigResponseDto>.NewConfig()
+                .Map(dest => dest.SedeNombre, src => src.Sede.Nombre)
+                .Map(dest => dest.ProductoNombre, src => src.Producto.NombreComercial);
+
+            TypeAdapterConfig<InventarioAlmacenCentral, InventarioAlmacenCentralDto>.NewConfig()
+                .Map(dest => dest.CodigoLote, src => src.Lote.CodigoLote)
+                .Map(dest => dest.FechaVencimiento, src => src.Lote.FechaVencimiento)
+                .Map(dest => dest.ProductoId, src => src.Lote.Producto.Id)
+                .Map(dest => dest.NombreComercial, src => src.Lote.Producto.NombreComercial)
+                .Map(dest => dest.CodigoBarras, src => src.Lote.Producto.CodigoBarras);
+
+            TypeAdapterConfig<Producto, ProductoDetalleDto>.NewConfig()
+                .Map(dest => dest.EsPsicotropico, src => src.EsPsicotropico ? "Sí" : "No")
+                .Map(dest => dest.Activo, src => src.Activo ? "Activo" : "Inactivo")
+                .Map(dest => dest.PrecioCajaRecomendado, src => src.PrecioCaja)
+                .Map(dest => dest.PrecioBlisterRecomendado, src => src.PrecioBlister)
+                .Map(dest => dest.PrecioUnidadRecomendado, src => src.PrecioUnidad);
+
+            TypeAdapterConfig<InventarioAlmacenCentral, InventarioDetalleAlmacenCentralDto>.NewConfig()
+                .Map(dest => dest.DetalleProducto, src => src.Lote.Producto)
+                .Map(dest => dest.DetalleLote, src => src.Lote);
+
+            TypeAdapterConfig<TransaccionKardex, KardexResponseDto>.NewConfig()
+                .Map(dest => dest.SedeId, src => src.SedeId)
+                .Map(dest => dest.NombreSede, src => src.Sede != null
+                    ? src.Sede.Nombre
+                    : (src.EsAlmacenCentral ? "Almacén Central" : string.Empty))
+                .Map(dest => dest.CodigoLote, src => src.Lote.CodigoLote);
+
         }
     }
 }

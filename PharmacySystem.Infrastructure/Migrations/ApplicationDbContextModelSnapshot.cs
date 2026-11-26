@@ -242,6 +242,33 @@ namespace PharmacySystem.Infrastructure.Migrations
                     b.ToTable("DetallesVenta");
                 });
 
+            modelBuilder.Entity("PharmacySystem.Domain.Entities.InventarioAlmacenCentral", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("FechaUltimaActualizacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("LoteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("StockFisicoUnidades")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockMinimoUnidades")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LoteId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_InventariosAlmacenCentral_LoteId");
+
+                    b.ToTable("InventariosAlmacenCentral");
+                });
+
             modelBuilder.Entity("PharmacySystem.Domain.Entities.InventarioSede", b =>
                 {
                     b.Property<Guid>("Id")
@@ -301,6 +328,9 @@ namespace PharmacySystem.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("CantidadInicialUnidades")
+                        .HasColumnType("int");
 
                     b.Property<string>("CodigoLote")
                         .IsRequired()
@@ -631,16 +661,22 @@ namespace PharmacySystem.Infrastructure.Migrations
                     b.Property<int>("CantidadUnidades")
                         .HasColumnType("int");
 
+                    b.Property<bool>("EsAlmacenCentral")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("LoteId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<decimal>("PrecioCostoUnitario")
+                        .HasColumnType("decimal(18,4)");
+
                     b.Property<string>("ReferenciaDocumento")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("SedeId")
+                    b.Property<Guid?>("SedeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("StockAnteriorUnidades")
@@ -831,7 +867,7 @@ namespace PharmacySystem.Infrastructure.Migrations
                             NormalizedEmail = "GERENCIA@FARMACIA.COM",
                             NormalizedUserName = "GERENCIA@FARMACIA.COM",
                             NumeroDoc = "20552103816",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPE6hnhWsOYqvNiehrBgsO4Fs51QOUEMV2q9xSb+PSVCcfu5zNIbcCRg09gQy8B5+Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEA+ofEjONFmQuB6XC1MuJh/6ahsMMeTO2VJhlgKvYNyMDx/3SzMcJa0UN6iu3XCOVA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "d3b07384-d113-40e4-a720-78fbf2fb1873",
                             TwoFactorEnabled = false,
@@ -1021,6 +1057,17 @@ namespace PharmacySystem.Infrastructure.Migrations
                     b.Navigation("Venta");
                 });
 
+            modelBuilder.Entity("PharmacySystem.Domain.Entities.InventarioAlmacenCentral", b =>
+                {
+                    b.HasOne("PharmacySystem.Domain.Entities.Lote", "Lote")
+                        .WithOne("InventarioAlmacenCentral")
+                        .HasForeignKey("PharmacySystem.Domain.Entities.InventarioAlmacenCentral", "LoteId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Lote");
+                });
+
             modelBuilder.Entity("PharmacySystem.Domain.Entities.InventarioSede", b =>
                 {
                     b.HasOne("PharmacySystem.Domain.Entities.Lote", "Lote")
@@ -1135,8 +1182,7 @@ namespace PharmacySystem.Infrastructure.Migrations
                     b.HasOne("PharmacySystem.Domain.Entities.Sede", "Sede")
                         .WithMany()
                         .HasForeignKey("SedeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("PharmacySystem.Domain.Entities.Usuario", "Usuario")
                         .WithMany()
@@ -1215,6 +1261,8 @@ namespace PharmacySystem.Infrastructure.Migrations
 
             modelBuilder.Entity("PharmacySystem.Domain.Entities.Lote", b =>
                 {
+                    b.Navigation("InventarioAlmacenCentral");
+
                     b.Navigation("InventariosSede");
                 });
 

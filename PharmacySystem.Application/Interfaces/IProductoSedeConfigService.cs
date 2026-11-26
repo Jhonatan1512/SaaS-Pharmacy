@@ -10,5 +10,6 @@ namespace PharmacySystem.Application.Interfaces
     public interface IProductoSedeConfigService
     {
         Task RegistrarConfiguracionAsync(ProductoSedeConfigDto dto);
+        Task<List<ProductoSedeConfigResponseDto>> ObtenerConfiguracionesProductoAsync();
     }
 }

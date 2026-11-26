@@ -25,5 +25,13 @@ namespace PharmacySystem.Api.Controllers
             await _configService.RegistrarConfiguracionAsync(dto);
            return Ok(new { message = "Configuración para el producto registrada"});
         }
+
+        [HttpGet("lista-configuraciones")]
+        [Authorize(Roles = "Gerente")]
+        public async Task<IActionResult> ObtenerListaConfiguraciones()
+        {
+            var response = await _configService.ObtenerConfiguracionesProductoAsync();
+            return Ok(response);
+        }
     }
 }

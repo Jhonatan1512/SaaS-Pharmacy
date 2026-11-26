@@ -11,6 +11,8 @@ namespace PharmacySystem.Application.Interfaces
     public interface ISolicitudReposicionAdminService
     {
         Task ResponderSolicitudAsync(Guid solicitudId, Guid adminId, ResponderSolicitudReposicionDto dto);
+        Task ModificarRespuestaSolicitudAsync(Guid solicitudId, Guid adminId, ResponderSolicitudReposicionDto dto);
+        Task FinalizarSolictudAsync(Guid solicitudId);
         Task<List<SolicitudReposicionDocumentoDto>> ListarTodasAsync(Guid? sedeId = null, EstadoSolicitudEnum? estado = null);
         Task<SolicitudReposicionDocumentoDto> ObtenerPorIdAsync(Guid id);
     }

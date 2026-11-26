@@ -1,9 +1,6 @@
 ﻿using PharmacySystem.Domain.Entities;
-using PharmacySystem.Domain.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PharmacySystem.Domain.Interfaces
@@ -11,16 +8,43 @@ namespace PharmacySystem.Domain.Interfaces
     public interface IInventarioSedeRepository
     {
         Task<bool> ExisteInventarioEnSedeAsync(Guid sedeId, Guid loteId);
-        Task<InventarioSede?> ObtenerPorSedeYLoteActualizarAsync(Guid sedeId, Guid loteId);
-        Task CrearInventarioSedeAsync(InventarioSede sede);
-        Task ActualizarAsync();
-        Task<InventarioSede?> ObtenerCapaActivaPorSedeLoteYPrecioAsync(Guid sedeId, Guid loteId, decimal? precioVenta);
-        Task EliminarRegistroAsync(InventarioSede inventario);
         Task<InventarioSede?> ObtenerPorIdAsync(Guid id);
-        Task<InventarioSede?> ObtenerPorSedeLotePrecioYEstadoAsync(Guid sedeId, Guid loteId, decimal precioVentaUnidad, EstadoLoteSedeEnum estado);
         Task<IEnumerable<InventarioSede>> ObtenerPorSedeIdAsync(Guid sedeId);
         Task<List<InventarioSede>> ObtenerPorIdsParaVentaAsync(IEnumerable<Guid> ids);
-        Task DescontarStockSpAsync(Guid inventarioSedeId, Guid sedeId, int cantidadUnidadesMinimas);
-    }
 
+        // Operaciones transaccionales mediante Stored Procedures
+        Task DespacharLoteASedeSpAsync(
+            Guid sedeId,
+            Guid loteId,
+            int cantidadUnidades,
+            decimal? precioVentaUnidad,
+            decimal? precioVentaBlister,
+            decimal? precioVentaCaja,
+            Guid usuarioId);
+
+        Task ConfirmarRecepcionSpAsync(
+            Guid inventarioSedeId,
+            Guid sedeUsuarioId,
+            Guid usuarioRecibeId,
+            int cantidadDaniada,
+            string? observacion);
+
+        Task ActualizarPrecioSpAsync(
+            Guid inventarioSedeId,
+            decimal? precioVentaUnidad,
+            decimal? precioVentaBlister,
+            decimal? precioVentaCaja);
+
+        Task CorregirMermaRecepcionSpAsync(
+            Guid inventarioSedeId,
+            Guid sedeUsuarioId,
+            Guid usuarioId,
+            int nuevaCantidadDanada,
+            string? motivoCorreccion);
+
+        Task DescontarStockSpAsync(
+            Guid inventarioSedeId,
+            Guid sedeId,
+            int cantidadUnidadesMinimas);
+    }
 }

@@ -25,8 +25,7 @@ namespace PharmacySystem.Infrastructure.Repositories
 
         public async Task CrearLoteAsync(Lote lote)
         {
-            _context.Lotes.Add(lote);
-            await _context.SaveChangesAsync();
+            await _context.Lotes.AddAsync(lote);
         }
 
         public async Task<bool> ExisteCodigoLoteEnOtroRegistroAsync(Guid productoId, string codigoLote, Guid loteIdActual)

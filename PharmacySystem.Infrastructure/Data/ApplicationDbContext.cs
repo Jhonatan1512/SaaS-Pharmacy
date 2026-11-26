@@ -27,6 +27,8 @@ namespace PharmacySystem.Infrastructure.Data
         public DbSet<PagoVenta> PagosVenta => Set<PagoVenta>();
         public DbSet<TurnoCaja> TurnosCaja => Set<TurnoCaja>();
         //
+        // En la sección de DbSets:
+        public DbSet<InventarioAlmacenCentral> InventariosAlmacenCentral => Set<InventarioAlmacenCentral>();
         public DbSet<TransaccionKardex> TransaccionesKardex => Set<TransaccionKardex>();
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -63,6 +65,18 @@ namespace PharmacySystem.Infrastructure.Data
             builder.Entity<SolicitudReposicion>().HasOne(s => s.UsuarioSolicitante).WithMany().HasForeignKey(s => s.UsuarioSolicitanteId).OnDelete(DeleteBehavior.Restrict);
             builder.Entity<DetalleSolicitudReposicion>().HasOne(d => d.Solicitud).WithMany(s => s.Detalles).HasForeignKey(d => d.SolicitudId).OnDelete(DeleteBehavior.Cascade);
             builder.Entity<DetalleSolicitudReposicion>().HasOne(d => d.Producto).WithMany().HasForeignKey(d => d.ProductoId).OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<InventarioAlmacenCentral>(entity =>
+            {
+                entity.HasIndex(i => i.LoteId)
+                    .IsUnique()
+                    .HasDatabaseName("IX_InventariosAlmacenCentral_LoteId");
+
+                entity.HasOne(i => i.Lote)
+                    .WithOne(l => l.InventarioAlmacenCentral)
+                    .HasForeignKey<InventarioAlmacenCentral>(i => i.LoteId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
 
             // --- Venta ---
             builder.Entity<Venta>().HasOne(v => v.Sede).WithMany().HasForeignKey(v => v.SedeId).OnDelete(DeleteBehavior.Restrict);

@@ -22,6 +22,14 @@ namespace PharmacySystem.Application.Services
             _productoRepository = productoRepository;
             _sedeRepository = sedeRepository;
         }
+
+        public async Task<List<ProductoSedeConfigResponseDto>> ObtenerConfiguracionesProductoAsync()
+        {
+            var datosBd = await _productoSedeRepository.ObtenerConfiguracionProductosAsync();
+            var response = datosBd.Adapt<List<ProductoSedeConfigResponseDto>>();
+            return response;
+        }
+
         public async Task RegistrarConfiguracionAsync(ProductoSedeConfigDto dto)
         {
             var sedeId = await _sedeRepository.ObtenerSedePorIdAsync(dto.SedeId);

@@ -9,7 +9,6 @@ namespace PharmacySystem.Application.Interfaces
 {
     public interface ILoteService
     {
-        Task CrearLoteAsync(LoteDto dto);
         Task<IEnumerable<GetLoteDto>> GetLoteAsync();
         Task ActualizarLoteAsync(Guid id, actualizarLoteDto dto);
     }

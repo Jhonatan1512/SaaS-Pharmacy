@@ -8,11 +8,10 @@ namespace PharmacySystem.Domain.Enums
 {
     public enum TipoMovimientoKardexEnum
     {
-        IngresoCompra = 1,
-        TrasladoEntrada = 2,
-        TrasladoSalida = 3,
-        Venta = 4,
-        Merma = 5,
-        Ajuste = 6
+        IngresoLote = 1,
+        SalidaLote = 2,
+        Venta = 3,
+        Merma = 4,
+        Ajuste = 5
     }
 }

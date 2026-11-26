@@ -9,6 +9,7 @@ namespace PharmacySystem.Application.DTOs
     public class SolicitudReposicionDocumentoDto
     { 
         public Guid Id { get; set; }
+        public Guid SedeId { get; set; } 
         public string SedeSolicitante { get; set; } = string.Empty;
         public string UsuarioSolicitante { get; set; } = string.Empty;
         public DateTime FechaSolicitud { get; set; }

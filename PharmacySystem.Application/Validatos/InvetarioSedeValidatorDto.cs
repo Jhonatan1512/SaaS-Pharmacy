@@ -29,9 +29,6 @@ namespace PharmacySystem.Application.Validatos
 
             RuleFor(x => x.PrecioVentaCaja)
                 .GreaterThanOrEqualTo(0).WithMessage("El precio por caja no puede ser negativo.");
-
-            RuleFor(x => x.Estado)
-                .IsInEnum().WithMessage("El estado asignado no es válido.");
         }
     }
 }

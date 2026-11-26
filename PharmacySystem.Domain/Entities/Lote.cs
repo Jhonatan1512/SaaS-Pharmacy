@@ -13,9 +13,11 @@ namespace PharmacySystem.Domain.Entities
         public string CodigoLote { get; set; } = string.Empty;
         public DateTime FechaVencimiento { get; set; }
         public decimal PrecioCostoUnitario { get; set; }
+        public int CantidadInicialUnidades { get; set; }
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
 
         public Producto Producto { get; set; } = null!;
+        public InventarioAlmacenCentral? InventarioAlmacenCentral { get; set; }
         public virtual ICollection<InventarioSede> InventariosSede { get; set; } = [];
     }
 }

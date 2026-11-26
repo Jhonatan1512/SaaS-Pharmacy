@@ -61,6 +61,11 @@ builder.Services.AddScoped<IAlertaReposicionService,  AlertaReposicionService>()
 builder.Services.AddScoped<IProductoSedeConfigRepository, ProductoSedeConfigRepository>();
 builder.Services.AddScoped<IProductoSedeConfigService, ProductoSedeConfigService>();
 builder.Services.AddScoped<ISolicitudReposicionAdminService, SolicitudReposicionAdminService>();
+builder.Services.AddScoped<IInventarioAlmacenCentralRepository, InventarioAlmacenCentralRepository>();
+builder.Services.AddScoped<ITransaccionKardexRepository, TransaccionKardexRepository>();
+builder.Services.AddScoped<IAlmacenCentralService, AlmacenCentralService>();
+builder.Services.AddScoped<IAlertasAlmacenCentralSerivce, AlertasAlmacenCentralSerivce>();
+builder.Services.AddScoped<ITransaccionKardexService, TransaccionKardexService>();
 
 //Identity
 builder.Services.AddIdentity<Usuario, Role>(options =>

@@ -16,14 +16,6 @@ namespace PharmacySystem.Api.Controllers
             _productoService = productoService;
         }
 
-        [HttpPost("crear-producto")]
-        [Authorize(Roles = "Gerente")]
-        public async Task<IActionResult> CrearProducto(ProductoDto dto)
-        {
-            await _productoService.CrearProductoAsync(dto);
-            return Ok(new { menssage = "Producto creado correctamente" });
-        }
-
         [HttpGet("lista-producto")]
         [Authorize(Roles = "Gerente")]
         public async Task<IActionResult> ObtenerProductos()

@@ -4,6 +4,7 @@ using PharmacySystem.Application.DTOs;
 using PharmacySystem.Application.Interfaces;
 using PharmacySystem.Application.Services;
 using PharmacySystem.Domain.Enums;
+using System.Security.Claims;
 
 namespace PharmacySystem.Api.Controllers
 {
@@ -55,18 +56,36 @@ namespace PharmacySystem.Api.Controllers
             return Ok(new { message = "Se dio respuesta a la solicitud"});
         }
 
-        [HttpGet]
+        [HttpGet("lista-admin")]
+        [Authorize(Roles = "Gerente")]
         public async Task<ActionResult<List<SolicitudReposicionDocumentoDto>>> ListarTodas([FromQuery] Guid? sedeId = null, [FromQuery] EstadoSolicitudEnum? estado = null)
         {
             var solicitudes = await _serviceAdmin.ListarTodasAsync(sedeId, estado);
             return Ok(solicitudes);
         }
 
-        [HttpGet("{id:guid}")]
+        [HttpGet("detalle-admin/{id:guid}")]
+        [Authorize(Roles = "Gerente")]
         public async Task<ActionResult<SolicitudReposicionDocumentoDto>> ObtenerPorId(Guid id)
         {
             var solicitud = await _serviceAdmin.ObtenerPorIdAsync(id);
             return Ok(solicitud);
+        }
+
+        [HttpPut("modificar-respuesta/{id:guid}")]
+        [Authorize(Roles = "Gerente")]
+        public async Task<ActionResult<SolicitudReposicionDocumentoDto>> ModificarRespuestaSolicitud(Guid id, ResponderSolicitudReposicionDto dto)
+        {
+            await _serviceAdmin.ModificarRespuestaSolicitudAsync(id, UsuarioId, dto);
+            return Ok(new { message = "Se actualizo la respuesta de la solicitud"});
+        }
+
+        [HttpPatch("finalizar-solicitud/{id}")]
+        [Authorize(Roles = "Gerente")]
+        public async Task<IActionResult> FinalizarSolicitud(Guid id)
+        {
+            await _serviceAdmin.FinalizarSolictudAsync(id);
+            return Ok(new { message = "Proceso de la solitud finalizado"});
         }
 
         private Guid UsuarioId => _currentUserService.GetUserId();

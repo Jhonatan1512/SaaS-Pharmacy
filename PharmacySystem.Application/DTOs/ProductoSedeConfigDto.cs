@@ -14,4 +14,16 @@ namespace PharmacySystem.Application.DTOs
         public int StockDeseadoUnidades { get; set; }
         public int DiasAnticipacionVencimiento { get; set; } = 30;
     }
+
+    public class ProductoSedeConfigResponseDto
+    {
+        public Guid Id { get; set; }
+        public Guid SedeId { get; set; }
+        public string SedeNombre { get; set; } = string.Empty;
+        public Guid ProductoId { get; set; }
+        public string ProductoNombre { get; set; } = string.Empty;
+        public int StockMinimoUnidades { get; set; }
+        public int StockDeseadoUnidades { get; set; }
+        public int DiasAnticipacionVencimiento { get; set; } = 30;
+    }
 }

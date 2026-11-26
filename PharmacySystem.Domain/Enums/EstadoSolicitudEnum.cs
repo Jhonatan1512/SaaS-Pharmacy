@@ -11,5 +11,6 @@ namespace PharmacySystem.Domain.Enums
         Pendiente = 1,
         Aprobado = 2,
         Rechazado = 3,
+        Despachado = 4,
     }
 }

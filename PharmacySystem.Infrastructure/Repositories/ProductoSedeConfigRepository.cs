@@ -27,6 +27,15 @@ namespace PharmacySystem.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<ProductoSedeConfig>> ObtenerConfiguracionProductosAsync()
+        {
+            return await _context.ProductosSedeConfig
+                .AsNoTracking()
+                .Include(c => c.Sede)
+                .Include(c => c.Producto)
+                .ToListAsync();
+        }
+
         public async Task<List<ProductoSedeConfig>> ObtenerConInventarioPorSedeAsync(Guid sedeId)
         {
             return await _context.ProductosSedeConfig
