@@ -30,35 +30,30 @@ namespace PharmacySystem.Infrastructure.Repositories
             await _context.Ventas.AddAsync(venta);
         }
 
-        public async Task<Venta?> ObtenerPorIdAsync(Guid id)
-        {
-            return await _context.Ventas
-                .AsNoTracking()
-                .Include(v => v.Sede)
-                .Include(v => v.Usuario)
-                .Include(v => v.Cliente)
-                .Include(v => v.Detalles)
-                    .ThenInclude(d => d.InventarioSede)
-                        .ThenInclude(i => i.Lote)
-                            .ThenInclude(l => l.Producto)
-                .Include(v => v.Pagos)
-                .FirstOrDefaultAsync(v => v.Id == id);
-        }
-
         public async Task GuardarCambiosAsync()
         {
             await _context.SaveChangesAsync();
         }
 
-        public async Task AnularVentaAsync(Guid ventaId, Guid sedeId, string motivoAnulacion)
+        public async Task AnularVentaAsync(Guid ventaId, Guid sedeId, Guid usuarioId, string motivoAnulacion)
         {
             try
             {
                 int estadoActivo = (int)EstadoLoteSedeEnum.Activo;
                 int estadoAgotado = (int)EstadoLoteSedeEnum.Agotado;
+                int tipoMovimientoAjuste = (int)TipoMovimientoKardexEnum.Ajuste;
+                DateTime fechaAnulacion = DateTime.UtcNow;
 
-                await _context.Database.ExecuteSqlInterpolatedAsync(
-                    $"EXEC sp_AnularVenta @VentaId={ventaId}, @SedeId={sedeId}, @MotivoAnulacion={motivoAnulacion}, @EstadoActivo={estadoActivo}, @EstadoAgotado={estadoAgotado}");
+                await _context.Database.ExecuteSqlInterpolatedAsync($@"
+            EXEC sp_AnularVenta 
+                @VentaId = {ventaId},
+                @SedeId = {sedeId},
+                @UsuarioId = {usuarioId},
+                @MotivoAnulacion = {motivoAnulacion},
+                @EstadoActivo = {estadoActivo},
+                @EstadoAgotado = {estadoAgotado},
+                @TipoMovimientoAjuste = {tipoMovimientoAjuste},
+                @FechaAnulacion = {fechaAnulacion}");
             }
             catch (Microsoft.Data.SqlClient.SqlException ex) when (ex.Number == 50012)
             {
@@ -68,7 +63,7 @@ namespace PharmacySystem.Infrastructure.Repositories
             {
                 throw new UnauthorizedAccessException(ex.Message);
             }
-            catch (Microsoft.Data.SqlClient.SqlException ex) when (ex.Number >= 50011 && ex.Number <= 50020)
+            catch (Microsoft.Data.SqlClient.SqlException ex) when (ex.Number is >= 50011 and <= 50019)
             {
                 throw new InvalidOperationException(ex.Message);
             }
@@ -116,6 +111,43 @@ namespace PharmacySystem.Infrastructure.Repositories
                          && turnosCerradosIds.Contains(v.TurnoCajaId.Value))
                 .OrderByDescending(v => v.FechaEmision)
                 .ToListAsync();
+        }
+
+        public async Task<(string Serie, string Numero)> PrepararCabeceraVentaSpAsync(
+            Guid sedeId,
+            Guid usuarioId,
+            Guid turnoCajaId,
+            TipoComprobanteEnum tipoComprobante)
+        {
+            try
+            {
+                var serieParam = new Microsoft.Data.SqlClient.SqlParameter("@SerieOut", System.Data.SqlDbType.NVarChar, 20)
+                {
+                    Direction = System.Data.ParameterDirection.Output
+                };
+                var numeroParam = new Microsoft.Data.SqlClient.SqlParameter("@NumeroOut", System.Data.SqlDbType.NVarChar, 20)
+                {
+                    Direction = System.Data.ParameterDirection.Output
+                };
+
+                int tipoCompInt = (int)tipoComprobante;
+
+                await _context.Database.ExecuteSqlRawAsync(
+                    "EXEC sp_PrepararCabeceraVenta @SedeId={0}, @UsuarioId={1}, @TurnoCajaId={2}, @TipoComprobante={3}, @SerieOut=@SerieOut OUTPUT, @NumeroOut=@NumeroOut OUTPUT",
+                    sedeId, usuarioId, turnoCajaId, tipoCompInt, serieParam, numeroParam);
+
+                return ((string)serieParam.Value, (string)numeroParam.Value);
+            }
+            catch (Microsoft.Data.SqlClient.SqlException ex) when (ex.Number is >= 50030 and <= 50035)
+            {
+                if (ex.Number is 50030 or 50032 or 50035)
+                    throw new KeyNotFoundException(ex.Message);
+
+                if (ex.Number == 50033)
+                    throw new UnauthorizedAccessException(ex.Message);
+
+                throw new InvalidOperationException(ex.Message);
+            }
         }
     }
 }

@@ -103,6 +103,7 @@ namespace PharmacySystem.Infrastructure.Repositories
                 int estadoActivo = (int)EstadoLoteSedeEnum.Activo;
                 int estadoAgotado = (int)EstadoLoteSedeEnum.Agotado;
                 int tipoMovimientoIngreso = (int)TipoMovimientoKardexEnum.IngresoLote;
+                int tipoMovimientoMerma = (int)TipoMovimientoKardexEnum.Merma;
                 DateTime fechaRecepcion = DateTime.UtcNow;
 
                 await _context.Database.ExecuteSqlInterpolatedAsync($@"
@@ -116,6 +117,7 @@ namespace PharmacySystem.Infrastructure.Repositories
                         @EstadoActivo = {estadoActivo},
                         @EstadoAgotado = {estadoAgotado},
                         @TipoMovimientoIngreso = {tipoMovimientoIngreso},
+                        @TipoMovimientoMerma = {tipoMovimientoMerma},
                         @FechaRecepcion = {fechaRecepcion}");
             }
             catch (SqlException ex) when (ex.Number is >= 51010 and <= 51014)
@@ -193,19 +195,37 @@ namespace PharmacySystem.Infrastructure.Repositories
             }
         }
 
-        public async Task DescontarStockSpAsync(Guid inventarioSedeId, Guid sedeId, int cantidadUnidadesMinimas)
+        public async Task DescontarStockSpAsync(
+            Guid inventarioSedeId,
+            Guid sedeId,
+            Guid usuarioId,
+            int cantidadUnidadesMinimas,
+            string referenciaDocumento,
+            DateTime fechaEmision)
         {
             try
             {
                 int estadoActivo = (int)EstadoLoteSedeEnum.Activo;
                 int estadoAgotado = (int)EstadoLoteSedeEnum.Agotado;
-                DateTime fechaActual = DateTime.UtcNow.Date;
+                int tipoMovimientoVenta = (int)TipoMovimientoKardexEnum.Venta;
 
-                await _context.Database.ExecuteSqlInterpolatedAsync(
-                    $"EXEC sp_DescontarStockVenta @InventarioSedeId={inventarioSedeId}, @SedeId={sedeId}, @CantidadUnidadesMinimas={cantidadUnidadesMinimas}, @EstadoActivo={estadoActivo}, @EstadoAgotado={estadoAgotado}, @FechaActual={fechaActual}");
+                await _context.Database.ExecuteSqlInterpolatedAsync($@"
+            EXEC sp_DescontarStockVenta 
+                @InventarioSedeId = {inventarioSedeId},
+                @SedeId = {sedeId},
+                @UsuarioId = {usuarioId},
+                @CantidadUnidadesMinimas = {cantidadUnidadesMinimas},
+                @ReferenciaDocumento = {referenciaDocumento},
+                @EstadoActivo = {estadoActivo},
+                @EstadoAgotado = {estadoAgotado},
+                @TipoMovimientoVenta = {tipoMovimientoVenta},
+                @FechaEmision = {fechaEmision}");
             }
-            catch (SqlException ex) when (ex.Number >= 50001 && ex.Number <= 50010)
+            catch (SqlException ex) when (ex.Number is >= 50001 and <= 50008)
             {
+                if (ex.Number == 50002)
+                    throw new KeyNotFoundException(ex.Message);
+
                 throw new InvalidOperationException(ex.Message);
             }
         }

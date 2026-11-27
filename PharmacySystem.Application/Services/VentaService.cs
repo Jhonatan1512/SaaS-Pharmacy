@@ -43,7 +43,7 @@ namespace PharmacySystem.Application.Services
             _crearDetalleVentaService = crearDetalleVentaService;
         }
 
-        public async Task AnularVentaAsync(Guid ventaId, AnularVentaDto dto)
+        public async Task AnularVentaAsync(Guid userId, Guid ventaId, AnularVentaDto dto)
         {
             Guid userSedeId = _currentUserService.GetSedeId();
             if (userSedeId == Guid.Empty)
@@ -51,16 +51,17 @@ namespace PharmacySystem.Application.Services
                 throw new UnauthorizedAccessException("El farmacéutico no tiene una sede asignada.");
             }
 
-            await _ventaRepository.AnularVentaAsync(ventaId, userSedeId, dto.MotivoAnulacion);
+            await _ventaRepository.AnularVentaAsync(ventaId, userSedeId, userId, dto.MotivoAnulacion);
         }
 
         public async Task RealizarVentaAsync(Guid userId, VentasDto dto)
         {
             Guid userSedeId = _currentUserService.GetSedeId();
             if (userSedeId == Guid.Empty)
-            {
                 throw new UnauthorizedAccessException("El farmacéutico no tiene una sede asignada.");
-            }
+
+            if (dto.Detalles == null || dto.Detalles.Count == 0)
+                throw new InvalidOperationException("Debe agregar al menos un producto al detalle de la venta.");
 
             var turnoActivo = await _turnoCajaRepository.ObtenerTurnoAbiertoPorUsuarioAsync(userId);
             if (turnoActivo == null || turnoActivo.SedeId != userSedeId)
@@ -72,15 +73,13 @@ namespace PharmacySystem.Application.Services
 
             try
             {
-                var serieComprobante = await _serieComprobanteRepository.ObtenerSerieActivaPorSedeYTipoAsync(userSedeId, dto.TipoComprobante)
-                ?? throw new InvalidOperationException($"No existe una serie activa configurada para {dto.TipoComprobante} en esta sede.");
+                var fechaEmision = DateTime.UtcNow;
 
-                serieComprobante.UltimoCorrelativo++;
-                string numeroFormateado = serieComprobante.UltimoCorrelativo.ToString("D8");
+                // Valida sede activa, turno abierto en BD y reserva correlativo con bloqueo de fila
+                var (serie, numeroFormateado) = await _ventaRepository.PrepararCabeceraVentaSpAsync(
+                    userSedeId, userId, turnoActivo.Id, dto.TipoComprobante);
 
-                var idsInventario = dto.Detalles.Select(d => d.InventarioSedeId).Distinct().ToList();
-                var inventarios = await _inventarioSedeRepository.ObtenerPorIdsParaVentaAsync(idsInventario);
-                var inventarioDict = inventarios.ToDictionary(i => i.Id);
+                string referenciaComprobante = $"Venta {serie}-{numeroFormateado}";
 
                 var venta = new Venta
                 {
@@ -90,14 +89,20 @@ namespace PharmacySystem.Application.Services
                     ClienteId = dto.ClienteId,
                     TurnoCajaId = turnoActivo.Id,
                     TipoComprobante = dto.TipoComprobante,
-                    Serie = serieComprobante.Serie,
+                    Serie = serie,
                     Numero = numeroFormateado,
-                    FechaEmision = DateTime.UtcNow,
+                    FechaEmision = fechaEmision,
                     Moneda = "PEN",
                     EstadoSunat = "NO_EMITIDO"
                 };
 
-                venta.Detalles = await _crearDetalleVentaService.CrearDetalleVentaAsync(venta.Id, userSedeId, dto.Detalles);            
+                venta.Detalles = await _crearDetalleVentaService.CrearDetalleVentaAsync(
+                    venta.Id,
+                    userSedeId,
+                    userId,
+                    referenciaComprobante,
+                    fechaEmision,
+                    dto.Detalles);
 
                 _calculoTributarioService.ConsolidarTotalesYValidarPagos(venta);
                 _comprobanteValidacionService.ValidarReglaMontoIdentificacion(venta.TipoComprobante, venta.MontoTotalVenta, venta.ClienteId);
@@ -113,8 +118,8 @@ namespace PharmacySystem.Application.Services
                 await _ventaRepository.CrearAsync(venta);
                 await _ventaRepository.GuardarCambiosAsync();
                 await transaction.CommitAsync();
-
-            } catch
+            }
+            catch
             {
                 await transaction.RollbackAsync();
                 throw;

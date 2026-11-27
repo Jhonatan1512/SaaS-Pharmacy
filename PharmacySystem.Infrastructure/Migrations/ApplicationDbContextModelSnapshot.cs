@@ -867,7 +867,7 @@ namespace PharmacySystem.Infrastructure.Migrations
                             NormalizedEmail = "GERENCIA@FARMACIA.COM",
                             NormalizedUserName = "GERENCIA@FARMACIA.COM",
                             NumeroDoc = "20552103816",
-                            PasswordHash = "AQAAAAIAAYagAAAAEA+ofEjONFmQuB6XC1MuJh/6ahsMMeTO2VJhlgKvYNyMDx/3SzMcJa0UN6iu3XCOVA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENA4JxtzX/NjSmRSbQe8H0pk3kxrXBHFlxZ5zga2skVYna2kPlFZ48qEvsIVYB1ZIQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "d3b07384-d113-40e4-a720-78fbf2fb1873",
                             TwoFactorEnabled = false,

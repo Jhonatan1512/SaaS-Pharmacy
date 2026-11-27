@@ -22,13 +22,27 @@ public class CrearDetalleVentaService : ICrearDetalleVentaService
         _calculoTributarioService = calculoTributarioService;
     }
 
-    public async Task<List<DetalleVenta>> CrearDetalleVentaAsync(Guid ventaId, Guid sedeId, IEnumerable<DetalleVentaCreateDto> dto)
+    public async Task<List<DetalleVenta>> CrearDetalleVentaAsync(
+        Guid ventaId,
+        Guid sedeId,
+        Guid usuarioId,
+        string referenciaDocumento,
+        DateTime fechaEmision,
+        IEnumerable<DetalleVentaCreateDto> dto)
     {
-        var idsInventario = dto.Select(d => d.InventarioSedeId).Distinct().ToList();
+        var listaDto = dto?.ToList() ?? [];
+        if (listaDto.Count == 0)
+            throw new InvalidOperationException("La venta debe contener al menos un producto.");
+
+        if (listaDto.Any(d => d.CantidadVenta <= 0))
+            throw new InvalidOperationException("La cantidad de venta de cada producto debe ser mayor a cero.");
+
+        var idsInventario = listaDto.Select(d => d.InventarioSedeId).Distinct().ToList();
         var inventarios = await _inventarioSedeRepository.ObtenerPorIdsParaVentaAsync(idsInventario);
         var inventarioDict = inventarios.ToDictionary(i => i.Id);
 
-        var detallesOrdenadosFefo = dto
+        // Ordenar por FechaVencimiento ASC para procesar primero el lote FEFO en caso de ventas divididas entre 2 lotes
+        var detallesOrdenadosFefo = listaDto
             .Select(item =>
             {
                 if (!inventarioDict.TryGetValue(item.InventarioSedeId, out var inventario))
@@ -52,7 +66,13 @@ public class CrearDetalleVentaService : ICrearDetalleVentaService
             decimal precioUnitarioConIgv = _presentacionService.ObtenerPrecioPorPresentacion(
                 inventario, item.TipoUnidadVenta);
 
-            await _inventarioSedeRepository.DescontarStockSpAsync(inventario.Id, sedeId, unidadesMinimas);
+            await _inventarioSedeRepository.DescontarStockSpAsync(
+                inventario.Id,
+                sedeId,
+                usuarioId,
+                unidadesMinimas,
+                referenciaDocumento,
+                fechaEmision);
 
             var valorTexto = inventario.Lote.Producto.TipoAfectacionIgvDefault;
 

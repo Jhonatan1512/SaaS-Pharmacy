@@ -45,6 +45,9 @@ namespace PharmacySystem.Domain.Interfaces
         Task DescontarStockSpAsync(
             Guid inventarioSedeId,
             Guid sedeId,
-            int cantidadUnidadesMinimas);
+            Guid usuarioId,
+            int cantidadUnidadesMinimas,
+            string referenciaDocumento,
+            DateTime fechaEmision);
     }
 }

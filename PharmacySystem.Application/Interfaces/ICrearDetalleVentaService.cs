@@ -10,6 +10,11 @@ namespace PharmacySystem.Application.Interfaces
 {
     public interface ICrearDetalleVentaService
     {
-        Task<List<DetalleVenta>> CrearDetalleVentaAsync(Guid ventaId, Guid sedeId, IEnumerable<DetalleVentaCreateDto> dto);
+        Task<List<DetalleVenta>> CrearDetalleVentaAsync(Guid ventaId,
+            Guid sedeId,
+            Guid usuarioId,
+            string referenciaDocumento,
+            DateTime fechaEmision,
+            IEnumerable<DetalleVentaCreateDto> dto);
     }
 }

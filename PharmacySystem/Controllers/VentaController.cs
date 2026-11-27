@@ -33,7 +33,7 @@ namespace PharmacySystem.Api.Controllers
         [Authorize(Roles = "Farmaceutico")]
         public async Task<IActionResult> AnularVenta(Guid id, AnularVentaDto dto)
         {
-            await _ventaService.AnularVentaAsync(id, dto);
+            await _ventaService.AnularVentaAsync(UserId, id, dto);
             return Ok(new { message = "Venta anulada" });
         }
 
